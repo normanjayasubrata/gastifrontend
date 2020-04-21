@@ -1,0 +1,2 @@
+export const SET_WINDOW_SIZE = "SET_WINDOW_SIZE";
+export const IS_MOBILE_WINDOW = "IS_MOBILE_WINDOW";
