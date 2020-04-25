@@ -83,7 +83,7 @@ const Contact = props => {
     )
 
   return (
-    <div>
+    <div style={{marginTop: isNotMobile ? "80px" : "0px"}}>
      { isNotMobile ? desktopView : mobileView }
     </div>
   );
