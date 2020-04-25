@@ -9,7 +9,8 @@ const MediaPage = (props) => {
     backgroundRepeat: "no-repeat",
       backgroundPosition: "50rem 31rem, 68.5rem 4rem",
     backgroundSize: "13%, 15%",
-    height: `${windowHeight}px`
+    height: `${windowHeight}px`,
+    marginTop: "5rem"
   };
   const desktopView = (
     <Container

@@ -2,32 +2,36 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ReactSnapScroll from "react-snap-scroll";
 
+import { account_type } from "../../store/action";
+
 import "./index.css";
 import Search from "./Search";
 import About from "./About";
 import MediaPage from "./MediaPage";
 import Services from "./Services";
 import Contact from "./Contact";
+import TenantPage from './TenantPage';
 
 export class Home extends Component {
   render() {
     const { isNotMobile } = this.props.pageSize;
+    const { accountType } = this.props;
     const desktopRender = (
       <ReactSnapScroll transition="move-top-bottom">
-        <Search windowSize={this.props.pageSize} />
-        <About windowSize={this.props.pageSize} />
-        <MediaPage windowSize={this.props.pageSize} />
-        <Services windowSize={this.props.pageSize} />
-        <Contact windowSize={this.props.pageSize} />
+        {accountType.id === 1 ? <Search windowSize={this.props.pageSize} accountType={accountType} /> : <TenantPage windowSize={this.props.pageSize} accountType={accountType} />}
+        <About windowSize={this.props.pageSize} accountType={accountType} />
+        <MediaPage windowSize={this.props.pageSize} accountType={accountType} />
+        <Services windowSize={this.props.pageSize} accountType={accountType} setAccountType={this.props.setAccountType} />
+        <Contact windowSize={this.props.pageSize} accountType={accountType} />
       </ReactSnapScroll>
     );
     const mobileRender = (
       <div>
-        <Search windowSize={this.props.pageSize} />
-        <About windowSize={this.props.pageSize} />
-        <MediaPage windowSize={this.props.pageSize} />
-        <Services windowSize={this.props.pageSize} />
-        <Contact windowSize={this.props.pageSize} />
+        {accountType.id === 1 ? <Search windowSize={this.props.pageSize} accountType={accountType} /> : <TenantPage windowSize={this.props.pageSize} accountType={accountType} />}
+        <About windowSize={this.props.pageSize} accountType={accountType} />
+        <MediaPage windowSize={this.props.pageSize} accountType={accountType} />
+        <Services windowSize={this.props.pageSize} accountType={accountType} setAccountType={this.props.setAccountType} />
+        <Contact windowSize={this.props.pageSize} accountType={accountType} />
       </div>
     );
     return (
@@ -40,6 +44,11 @@ export class Home extends Component {
 
 const mapStateToProps = (state) => ({
   pageSize: state.windowSizeReducer,
+  accountType: state.accountReducer.accountType
 });
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = (dispatch) => ({
+  setAccountType: (data) => dispatch(account_type(data))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

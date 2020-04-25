@@ -16,15 +16,15 @@ const infos = [
 
 
 const About = (props) => {
-  console.log(props);
-  const { windowHeight, isNotMobile} = props.windowSize
+  const { /* windowHeight,  */isNotMobile} = props.windowSize
   return (
     <div
       style={{
         backgroundImage: `url(${trianglePic})`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "-13rem top",
-        height: isNotMobile ? `${windowHeight}px` : null
+        marginTop: isNotMobile ? "10rem" : "1rem"
+        // height: isNotMobile ? `${windowHeight}px` : null
 
       }}
     >

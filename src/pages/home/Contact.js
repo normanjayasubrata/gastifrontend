@@ -38,7 +38,7 @@ const Contact = props => {
         {
             infos.map((info, index) => {
                 return (
-                  <Row className="justify-content-end" style={{fontSize: "1rem"}}>
+                  <Row key={index} className="justify-content-end" style={{fontSize: "1rem"}}>
                   <p style={{color: "#DF1C78", fontWeight: "bold", marginRight: "1rem"}}>{info.title}</p>
                   <p>{info.value}</p>
                 </Row>
@@ -70,7 +70,7 @@ const Contact = props => {
        {
             infos.map((info, index) => {
                return (
-                 <Row className="justify-content-center" style={{fontSize: "1rem"}}>
+                 <Row key={index} className="justify-content-center" style={{fontSize: "1rem"}}>
                  <p style={{color: "#DF1C78", fontWeight: "bold"}}>{info.title}</p>
                  <p>{info.value}</p>
                </Row>

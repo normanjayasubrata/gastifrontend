@@ -11,6 +11,7 @@ import {
 import { petaIndo } from "../../assets/images";
 
 const Search = props => {
+    
     const {windowHeight, isNotMobile} = props.windowSize;
     const desktopStyle = {
       backgroundImage: `url(${petaIndo})`,

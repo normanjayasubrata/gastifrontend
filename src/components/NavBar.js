@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Navbar, Nav, Col, Button } from "react-bootstrap";
 import { connect } from 'react-redux'
+import { Link } from "react-router-dom";
 
 import { gastiLogo } from "../assets/images";
 
@@ -28,39 +29,41 @@ export class NavBar extends Component {
     return (
       <div style={{ paddingBottom: "6rem" }}>
         <Navbar fixed="top" style={{backgroundColor: "white", borderBottom: "1px solid #E4E4E4", paddingRight: paddingLeftRight, paddingLeft: paddingLeftRight, paddingTop: "1rem", paddingBottom: "1rem"}} expand="lg">
-          <Navbar.Brand href="/">
-            <img
-              src={gastiLogo}
-              width="78"
-              height="45"
-              className="d-inline-block align-top"
-              alt="Gasti's Logo"
-            />
+          <Navbar.Brand>
+           <Link to="/">
+           <img
+           src={gastiLogo}
+           width="78"
+           height="45"
+           className="d-inline-block align-top"
+           alt="Gasti's Logo"
+         /> 
+           </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
               <Col>
                 <Nav className="justify-content-end">
                   <Nav.Item>
-                    <Nav.Link href="/login">
-                      <Button style={{ color: "#909090" }} variant="link">
-                        Masuk
-                      </Button>
-                    </Nav.Link>
+                    <Link to="/login">
+                    <Button style={{ color: "#909090" }} variant="link">
+                    Masuk
+                  </Button>
+                    </Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link href="/register">
-                      <Button
-                        style={{
-                          backgroundColor: "#DF1C78",
-                          border: "none",
-                          width: "94px",
-                          height: "42px",
-                        }}
-                      >
-                        Daftar
-                      </Button>
-                    </Nav.Link>
+                     <Link to="/register">
+                     <Button
+                     style={{
+                       backgroundColor: "#DF1C78",
+                       border: "none",
+                       width: "94px",
+                       height: "42px",
+                     }}
+                   >
+                     Daftar
+                   </Button>
+                     </Link>
                   </Nav.Item>
                 </Nav>
               </Col>
