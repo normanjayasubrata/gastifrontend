@@ -68,8 +68,7 @@ export class RegisterPage extends Component {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'a'
+        'Content-Type': 'application/json'
       }
     }
 
