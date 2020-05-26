@@ -7,9 +7,9 @@ import { enter_auth_page, exit_auth_page } from "../store/action";
 
 import { gastiLogo } from "../assets/images";
 import axios from "axios"
+import lconfig from "../config"
 
 class LoginPage extends Component {
-
     state = {
         form: {
             phoneNumber: "",
@@ -17,6 +17,7 @@ class LoginPage extends Component {
         },
         isAgree: false,
         isAllValidated: false,
+        token: "",
     }
 
     componentDidMount() {
@@ -61,8 +62,8 @@ class LoginPage extends Component {
 
     onSubmitHandler = (event) => {
         event.preventDefault();
-        var phone = this.state.form.phoneNumber
-        if (phone.substring(0, 2) == '08') {
+        let phone = this.state.form.phoneNumber
+        if (phone.substring(0, 2) === '08') {
             phone = phone.replace('08', '+628')
         }
 
@@ -81,11 +82,14 @@ class LoginPage extends Component {
             }
         })
 
-        axios.post('http://127.0.0.1:8088/v1/auth/login', data, config).then((response) => {
-            alert(response);
-        }, (error) => {
-            alert(error);
-        });
+        let url = lconfig.API_BASE_URL + '/v1/auth/login'
+        axios.post(url, data, config)
+            .then(function (response) {
+                console.log("response : " + JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+                console.log(JSON.stringify(error.response.data))
+            });
     }
 
     render() {
