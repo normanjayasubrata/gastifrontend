@@ -83,9 +83,11 @@ class LoginPage extends Component {
         })
 
         let url = lconfig.API_BASE_URL + '/v1/auth/login'
+        let self = this
         axios.post(url, data, config)
             .then(function (response) {
                 console.log("response : " + JSON.stringify(response.data));
+                self.setState({ token: JSON.stringify(response.data.value) })
             })
             .catch(function (error) {
                 console.log(JSON.stringify(error.response.data))
