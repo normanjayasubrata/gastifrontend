@@ -12,14 +12,14 @@ import RegisterPage from './pages/RegisterPage'
 export class Routes extends Component {
   render() {
     return (
-      <div style={{height:"100%"}}>
+      <div style={{ height: "100%" }}>
         <Router basename={process.env.PUBLIC_URL}>
-          <div style={{height:"100%"}}>
-           {!this.props.isAuthPage ?  <NavBar /> : null}
+          <div style={{ height: "100%" }}>
+            {!this.props.isAuthPage ? <NavBar /> : null}
             <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/login" component={LoginPage} />
-                <Route path="/register" component={RegisterPage} />
+              <Route exact path="/" component={Home} />
+              <Route path="/login" component={LoginPage} />
+              <Route path="/register" component={RegisterPage} />
               <Route path="*" component={NotFound} />
             </Switch>
           </div>

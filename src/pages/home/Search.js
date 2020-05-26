@@ -11,30 +11,30 @@ import {
 import { petaIndo } from "../../assets/images";
 
 const Search = props => {
-    
-    const {windowHeight, isNotMobile} = props.windowSize;
-    const desktopStyle = {
-      backgroundImage: `url(${petaIndo})`,
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: isNotMobile ? "center 40%": "center 60%",
-      backgroundSize: "100%",
-      textAlign: "center",
-      paddingLeft: "12rem",
-      paddingRight: "12rem",
-      height: `${windowHeight}px`,
-    }
 
-    const mobileStyle = {
-        textAlign: "center",
-        height: `${windowHeight * 0.5}px`,
-    }
+  const { windowHeight, isNotMobile } = props.windowSize;
+  const desktopStyle = {
+    backgroundImage: `url(${petaIndo})`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: isNotMobile ? "center 40%" : "center 60%",
+    backgroundSize: "100%",
+    textAlign: "center",
+    paddingLeft: "12rem",
+    paddingRight: "12rem",
+    height: `${windowHeight}px`,
+  }
+
+  const mobileStyle = {
+    textAlign: "center",
+    height: `${windowHeight * 0.5}px`,
+  }
 
   return (
     <div
       className="container"
       style={isNotMobile ? desktopStyle : mobileStyle}
     >
-      <h1 style={{ fontSize: isNotMobile ?  "3.625rem" : "2rem", marginBottom: isNotMobile ? "8rem" : "4rem" , marginTop: isNotMobile ? "4rem" : "2rem"}}>
+      <h1 style={{ fontSize: isNotMobile ? "3.625rem" : "2rem", marginBottom: isNotMobile ? "8rem" : "4rem", marginTop: isNotMobile ? "4rem" : "2rem" }}>
         Lorem ipsum dolor sit amet
       </h1>
 

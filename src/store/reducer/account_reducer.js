@@ -7,10 +7,10 @@ const initialState = {
 export default (state = initialState, { type, payload }) => {
     switch (type) {
 
-    case actionType.ACCOUNT_TYPE:
-        return { ...state, ...payload }
+        case actionType.ACCOUNT_TYPE:
+            return { ...state, ...payload }
 
-    default:
-        return state
+        default:
+            return state
     }
 }
