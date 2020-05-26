@@ -66,6 +66,11 @@ export class RegisterPage extends Component {
   onSubmitHandler = (event) => {
     event.preventDefault();
 
+    let phone = this.state.form.phoneNumber
+    if (phone.substring(0, 2) === '08') {
+      phone = phone.replace('08', '+628')
+    }
+
     const config = {
       headers: {
         'Content-Type': 'application/json'
@@ -76,7 +81,7 @@ export class RegisterPage extends Component {
       account_type: 'GUDANG',
       account_role: 'ADMIN',
       auth: {
-        username: this.state.form.phoneNumber,
+        username: phone,
         password: this.state.form.password
       },
       detail: {
@@ -93,11 +98,13 @@ export class RegisterPage extends Component {
       }
     })
 
-    axios.post('http://127.0.0.1:8088/v1/account/register', data, config).then((response) => {
-      alert(response);
-    }, (error) => {
-      alert(error);
-    });
+    axios.post('http://127.0.0.1:8088/v1/account/register', data, config)
+      .then(function (response) {
+        console.log("response : " + JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(JSON.stringify(error.response.data))
+      });
   };
 
   render() {
