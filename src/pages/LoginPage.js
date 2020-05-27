@@ -30,6 +30,7 @@ class LoginPage extends Component {
 
     onChangeHandler = event => {
         const { name, value, checked } = event.target
+
         this.setState(state => {
             if (name === "checkbox") {
                 return { isAgree: checked }

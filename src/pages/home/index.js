@@ -13,30 +13,20 @@ import Contact from "./Contact";
 import TenantPage from './TenantPage';
 
 export class Home extends Component {
+  isLogin(pageSize, accountType, accountTypeID) {
+    return { accountTypeID } === 1 ? <Search windowSize={pageSize} accountType={accountType} /> : <TenantPage windowSize={this.props.pageSize} accountType={accountType} />;
+  }
+
   render() {
-    const { isNotMobile } = this.props.pageSize;
     const { accountType } = this.props;
-    const desktopRender = (
-      <ReactSnapScroll transition="move-top-bottom">
-        {accountType.id === 1 ? <Search windowSize={this.props.pageSize} accountType={accountType} /> : <TenantPage windowSize={this.props.pageSize} accountType={accountType} />}
-        <About windowSize={this.props.pageSize} accountType={accountType} />
-        <MediaPage windowSize={this.props.pageSize} accountType={accountType} />
-        <Services windowSize={this.props.pageSize} accountType={accountType} setAccountType={this.props.setAccountType} />
-        <Contact windowSize={this.props.pageSize} accountType={accountType} />
-      </ReactSnapScroll>
-    );
-    const mobileRender = (
-      <div>
-        {accountType.id === 1 ? <Search windowSize={this.props.pageSize} accountType={accountType} /> : <TenantPage windowSize={this.props.pageSize} accountType={accountType} />}
-        <About windowSize={this.props.pageSize} accountType={accountType} />
-        <MediaPage windowSize={this.props.pageSize} accountType={accountType} />
-        <Services windowSize={this.props.pageSize} accountType={accountType} setAccountType={this.props.setAccountType} />
-        <Contact windowSize={this.props.pageSize} accountType={accountType} />
-      </div>
-    );
+
     return (
       <div style={{ height: "100%" }}>
-        {isNotMobile ? desktopRender : mobileRender}
+        {this.isLogin(this.props.pageSize, accountType, accountType.id)}
+        <About windowSize={this.props.pageSize} accountType={accountType} />
+        <MediaPage windowSize={this.props.pageSize} accountType={accountType} />
+        <Services windowSize={this.props.pageSize} accountType={accountType} setAccountType={this.props.setAccountType} />
+        <Contact windowSize={this.props.pageSize} accountType={accountType} />
       </div>
     );
   }

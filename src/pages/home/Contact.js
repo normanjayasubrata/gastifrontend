@@ -3,88 +3,88 @@ import { Col, Row, Image, Container } from "react-bootstrap";
 import { gastiLogo } from "../../assets/images";
 
 const infos = [
-    {title: "", value: "Jl. Lorem ipsum dolor sit amet"},
-    {title: "", value: "Consectetur adipiscing elit"},
-    {title: "Phone : ", value: " 123456789"},
-    {title: "Email : ", value: " gasti@gasti.com"}
+  { title: "", value: "Jl. Lorem ipsum dolor sit amet" },
+  { title: "", value: "Consectetur adipiscing elit" },
+  { title: "Phone : ", value: " 123456789" },
+  { title: "Email : ", value: " gasti@gasti.com" }
 ]
 
 const Contact = props => {
-    const {windowWidth, windowHeight, isNotMobile} = props.windowSize;
+  const { windowWidth, windowHeight, isNotMobile } = props.windowSize;
 
 
-    const desktopView = (
-      <Row>
+  const desktopView = (
+    <Row>
       <Col>
         <iframe
-        title="main office"
+          title="main office"
           width={windowWidth * 0.8}
           height={windowHeight - 80}
           // style={{paddingBottom: "5rem"}}
           src="https://maps.google.com/maps?ll=-6.224585500000001,106.8109673&q=Sudirman Central Busines District&t=&z=14&ie=UTF8&iwloc=&output=embed"
-          // frameborder="0"
-          // scrolling="no"
-          // marginheight="0"
-          // marginwidth="0"
+        // frameborder="0"
+        // scrolling="no"
+        // marginheight="0"
+        // marginwidth="0"
         ></iframe>
       </Col>
-      <Col style={{paddingRight: "5rem", paddingTop: "4rem"}}>
+      <Col style={{ paddingRight: "5rem", paddingTop: "4rem" }}>
         <Row className="justify-content-end">
           <Image src={gastiLogo} />
         </Row>
-        <Row className="justify-content-end" style={{marginTop: "4rem", marginBottom: "3rem"}}>
+        <Row className="justify-content-end" style={{ marginTop: "4rem", marginBottom: "3rem" }}>
           <h1>Kontak Kami</h1>
         </Row>
         {
-            infos.map((info, index) => {
-                return (
-                  <Row key={index} className="justify-content-end" style={{fontSize: "1rem"}}>
-                  <p style={{color: "#DF1C78", fontWeight: "bold", marginRight: "1rem"}}>{info.title}</p>
-                  <p>{info.value}</p>
-                </Row>
-                )
-            })
+          infos.map((info, index) => {
+            return (
+              <Row key={index} className="justify-content-end" style={{ fontSize: "1rem" }}>
+                <p style={{ color: "#DF1C78", fontWeight: "bold", marginRight: "1rem" }}>{info.title}</p>
+                <p>{info.value}</p>
+              </Row>
+            )
+          })
         }
       </Col>
     </Row>
-    )
+  )
 
-    const mobileView = (
+  const mobileView = (
 
-     <Container>
-     <Row>
-       <iframe
-       title="main office"
-       width="100%"
-       height={windowHeight * 0.5}
-         src="https://maps.google.com/maps?ll=-6.224585500000001,106.8109673&q=Sudirman Central Busines District&t=&z=14&ie=UTF8&iwloc=&output=embed"
-       ></iframe>
-     
-     <Col style={{ paddingTop: "4rem"}}>
-       <Row className="justify-content-center">
-         <Image src={gastiLogo} />
-       </Row>
-       <Row className="justify-content-center" style={{marginTop: "4rem", marginBottom: "3rem"}}>
-         <h1>Kontak Kami</h1>
-       </Row>
-       {
+    <Container>
+      <Row>
+        <iframe
+          title="main office"
+          width="100%"
+          height={windowHeight * 0.5}
+          src="https://maps.google.com/maps?ll=-6.224585500000001,106.8109673&q=Sudirman Central Busines District&t=&z=14&ie=UTF8&iwloc=&output=embed"
+        ></iframe>
+
+        <Col style={{ paddingTop: "4rem" }}>
+          <Row className="justify-content-center">
+            <Image src={gastiLogo} />
+          </Row>
+          <Row className="justify-content-center" style={{ marginTop: "4rem", marginBottom: "3rem" }}>
+            <h1>Kontak Kami</h1>
+          </Row>
+          {
             infos.map((info, index) => {
-               return (
-                 <Row key={index} className="justify-content-center" style={{fontSize: "1rem"}}>
-                 <p style={{color: "#DF1C78", fontWeight: "bold"}}>{info.title}</p>
-                 <p>{info.value}</p>
-               </Row>
-               )
-           })
+              return (
+                <Row key={index} className="justify-content-center" style={{ fontSize: "1rem" }}>
+                  <p style={{ color: "#DF1C78", fontWeight: "bold" }}>{info.title}</p>
+                  <p>{info.value}</p>
+                </Row>
+              )
+            })
           }
-     </Col>
-   </Row>
-     </Container>
-    )
+        </Col>
+      </Row>
+    </Container>
+  )
 
   return (
-    <div style={{marginTop: isNotMobile ? "80px" : "0px"}}>
-     { isNotMobile ? desktopView : mobileView }
+    <div style={{ marginTop: isNotMobile ? "80px" : "0px" }}>
+      {isNotMobile ? desktopView : mobileView}
     </div>
   );
 };
