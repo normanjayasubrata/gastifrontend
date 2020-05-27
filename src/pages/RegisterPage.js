@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
 import { Form, Button, Container, Col, Row } from "react-bootstrap";
 import axios from 'axios';
+import lconfig from "../config"
 
 export class RegisterPage extends Component {
   state = {
@@ -98,7 +99,8 @@ export class RegisterPage extends Component {
       }
     })
 
-    axios.post('http://127.0.0.1:8088/v1/account/register', data, config)
+    let url = lconfig.API_BASE_URL + '/v1/account/register'
+    axios.post(url, data, config)
       .then(function (response) {
         console.log("response : " + JSON.stringify(response.data));
       })
