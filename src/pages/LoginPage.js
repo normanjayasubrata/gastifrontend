@@ -6,9 +6,10 @@ import { Form, Button, Container, Col, Row, Image } from "react-bootstrap";
 import { enter_auth_page, exit_auth_page } from "../store/action";
 
 import { gastiLogo } from "../assets/images";
+import axios from "axios"
+import lconfig from "../config"
 
 class LoginPage extends Component {
-
     state = {
         form: {
             phoneNumber: "",
@@ -16,6 +17,7 @@ class LoginPage extends Component {
         },
         isAgree: false,
         isAllValidated: false,
+        token: "",
     }
 
     componentDidMount() {
@@ -27,8 +29,6 @@ class LoginPage extends Component {
     }
 
     onChangeHandler = event => {
-
-
         const { name, value, checked } = event.target
 
         this.setState(state => {
@@ -47,7 +47,6 @@ class LoginPage extends Component {
         setTimeout(() => {
             this.validateAll();
         }, 100);
-
     }
 
     validateAll = () => {
@@ -64,15 +63,36 @@ class LoginPage extends Component {
 
     onSubmitHandler = (event) => {
         event.preventDefault();
-        alert(
-            `
-                "account_type": ${this.props.accountType.name},
-                "auth": {
-                  "username": ${this.state.form.phoneNumber},
-                  "password": ${this.state.form.password}
-                }
-                `
-        )
+        let phone = this.state.form.phoneNumber
+        if (phone.substring(0, 2) === '08') {
+            phone = phone.replace('08', '+628')
+        }
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        let data = JSON.stringify({
+            account_type: 'GUDANG',
+            account_role: 'ADMIN',
+            auth: {
+                username: phone,
+                password: this.state.form.password
+            }
+        })
+
+        let url = lconfig.API_BASE_URL + '/v1/auth/login'
+        let self = this
+        axios.post(url, data, config)
+            .then(function (response) {
+                console.log("response : " + JSON.stringify(response.data));
+                self.setState({ token: JSON.stringify(response.data.value) })
+            })
+            .catch(function (error) {
+                console.log(JSON.stringify(error.response.data))
+            });
     }
 
     render() {
