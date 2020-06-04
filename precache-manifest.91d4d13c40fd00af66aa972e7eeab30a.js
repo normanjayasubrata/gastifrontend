@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "147028e2743c6943cd5f6a661e673119",
+    "revision": "bebf25ad55bc38fa55c86075853f47f6",
     "url": "/gastifrontend/index.html"
   },
   {
-    "revision": "9e68ad119eff257251f7",
+    "revision": "550a270cd18cd961c489",
     "url": "/gastifrontend/static/css/2.69121389.chunk.css"
   },
   {
-    "revision": "10daba6b00055caad791",
-    "url": "/gastifrontend/static/css/main.4260d0bb.chunk.css"
+    "revision": "4f660646b0134150c5ee",
+    "url": "/gastifrontend/static/css/main.4a28c5f3.chunk.css"
   },
   {
-    "revision": "9e68ad119eff257251f7",
-    "url": "/gastifrontend/static/js/2.ee612455.chunk.js"
+    "revision": "550a270cd18cd961c489",
+    "url": "/gastifrontend/static/js/2.4c06abd5.chunk.js"
   },
   {
     "revision": "81c8e4b533017ac7156eb226b76c1e7f",
-    "url": "/gastifrontend/static/js/2.ee612455.chunk.js.LICENSE.txt"
+    "url": "/gastifrontend/static/js/2.4c06abd5.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "10daba6b00055caad791",
-    "url": "/gastifrontend/static/js/main.6de14fef.chunk.js"
+    "revision": "4f660646b0134150c5ee",
+    "url": "/gastifrontend/static/js/main.088079cd.chunk.js"
   },
   {
     "revision": "638df3222ad7b0717ee0",

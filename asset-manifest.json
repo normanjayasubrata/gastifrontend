@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/gastifrontend/static/css/main.4260d0bb.chunk.css",
-    "main.js": "/gastifrontend/static/js/main.6de14fef.chunk.js",
-    "main.js.map": "/gastifrontend/static/js/main.6de14fef.chunk.js.map",
+    "main.css": "/gastifrontend/static/css/main.4a28c5f3.chunk.css",
+    "main.js": "/gastifrontend/static/js/main.088079cd.chunk.js",
+    "main.js.map": "/gastifrontend/static/js/main.088079cd.chunk.js.map",
     "runtime-main.js": "/gastifrontend/static/js/runtime-main.590f35cc.js",
     "runtime-main.js.map": "/gastifrontend/static/js/runtime-main.590f35cc.js.map",
     "static/css/2.69121389.chunk.css": "/gastifrontend/static/css/2.69121389.chunk.css",
-    "static/js/2.ee612455.chunk.js": "/gastifrontend/static/js/2.ee612455.chunk.js",
-    "static/js/2.ee612455.chunk.js.map": "/gastifrontend/static/js/2.ee612455.chunk.js.map",
+    "static/js/2.4c06abd5.chunk.js": "/gastifrontend/static/js/2.4c06abd5.chunk.js",
+    "static/js/2.4c06abd5.chunk.js.map": "/gastifrontend/static/js/2.4c06abd5.chunk.js.map",
     "index.html": "/gastifrontend/index.html",
-    "precache-manifest.6b0ad88e2112115262088856bed193de.js": "/gastifrontend/precache-manifest.6b0ad88e2112115262088856bed193de.js",
+    "precache-manifest.91d4d13c40fd00af66aa972e7eeab30a.js": "/gastifrontend/precache-manifest.91d4d13c40fd00af66aa972e7eeab30a.js",
     "service-worker.js": "/gastifrontend/service-worker.js",
     "static/css/2.69121389.chunk.css.map": "/gastifrontend/static/css/2.69121389.chunk.css.map",
-    "static/css/main.4260d0bb.chunk.css.map": "/gastifrontend/static/css/main.4260d0bb.chunk.css.map",
-    "static/js/2.ee612455.chunk.js.LICENSE.txt": "/gastifrontend/static/js/2.ee612455.chunk.js.LICENSE.txt",
+    "static/css/main.4a28c5f3.chunk.css.map": "/gastifrontend/static/css/main.4a28c5f3.chunk.css.map",
+    "static/js/2.4c06abd5.chunk.js.LICENSE.txt": "/gastifrontend/static/js/2.4c06abd5.chunk.js.LICENSE.txt",
     "static/media/bg-03.png": "/gastifrontend/static/media/bg-03.279013c3.png",
     "static/media/img_peta.png": "/gastifrontend/static/media/img_peta.d8535bfa.png",
     "static/media/segitiga-02.png": "/gastifrontend/static/media/segitiga-02.8d38768e.png",
@@ -23,8 +23,8 @@
   "entrypoints": [
     "static/js/runtime-main.590f35cc.js",
     "static/css/2.69121389.chunk.css",
-    "static/js/2.ee612455.chunk.js",
-    "static/css/main.4260d0bb.chunk.css",
-    "static/js/main.6de14fef.chunk.js"
+    "static/js/2.4c06abd5.chunk.js",
+    "static/css/main.4a28c5f3.chunk.css",
+    "static/js/main.088079cd.chunk.js"
   ]
 }
