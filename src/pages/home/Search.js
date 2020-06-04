@@ -7,6 +7,7 @@ import {
   Col,
   Row,
 } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import { petaIndo } from "../../assets/images";
 
@@ -49,17 +50,19 @@ const Search = props => {
                 aria-describedby="basic-addon2"
               />
               <InputGroup.Append>
+                
                 <Button
-                  style={{
-                    fontSize: isNotMobile ? "1rem" : "0.62rem",
-                    backgroundColor: "#00C9A7",
-                    border: "none",
-                    paddingLeft: "1.625rem",
-                    paddingRight: "1.625rem",
-                  }}
-                >
-                  Cari Gudang
-                </Button>
+                style={{
+                  fontSize: isNotMobile ? "1rem" : "0.62rem",
+                  backgroundColor: "#00C9A7",
+                  border: "none",
+                  paddingLeft: "1.625rem",
+                  paddingRight: "1.625rem",
+                }}
+              >
+              <Link to="/searchresult">Cari Gudang</Link>
+                
+              </Button>
               </InputGroup.Append>
             </InputGroup>
           </Row>

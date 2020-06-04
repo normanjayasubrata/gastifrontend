@@ -1,7 +1,7 @@
 import * as actionType from "../action/type";
 
 const initialState = {
-    accountType: { id: 2, name: "GUDANG" }
+    accountType: { id: 2, name: "USAHA" }
 }
 
 export default (state = initialState, { type, payload }) => {
