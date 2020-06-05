@@ -8,6 +8,7 @@ import NotFound from "./components/NotFound";
 import Home from './pages/home'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+import AddPropertyPage from './pages/AddPropertyPage'
 
 export class Routes extends Component {
   render() {
@@ -20,6 +21,7 @@ export class Routes extends Component {
               <Route exact path="/" component={Home} />
               <Route path="/login" component={LoginPage} />
               <Route path="/register" component={RegisterPage} />
+              <Route path="/gudang/tambah" component={AddPropertyPage} />
               <Route path="*" component={NotFound} />
             </Switch>
           </div>
