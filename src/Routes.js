@@ -9,6 +9,8 @@ import Home from './pages/home'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import AddPropertyPage from './pages/AddPropertyPage'
+import ResultPage from './pages/ResultPage'
+import ResultPageDetail from './pages/ResultPageDetail'
 
 export class Routes extends Component {
   render() {
@@ -22,6 +24,8 @@ export class Routes extends Component {
               <Route path="/login" component={LoginPage} />
               <Route path="/register" component={RegisterPage} />
               <Route path="/gudang/tambah" component={AddPropertyPage} />
+              <Route exact path="/searchresult" component={ResultPage} />
+              <Route path="/searchresult/detail" component={ResultPageDetail} />
               <Route path="*" component={NotFound} />
             </Switch>
           </div>

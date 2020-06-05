@@ -22,7 +22,8 @@ export class Home extends Component {
 
     return (
       <div style={{ height: "100%" }}>
-        {this.isLogin(this.props.pageSize, accountType, accountType.id)}
+        {/* this.isLogin(this.props.pageSize, accountType, accountType.id) */}
+        <Search windowSize={this.props.pageSize} accountType={accountType} />
         <About windowSize={this.props.pageSize} accountType={accountType} />
         <MediaPage windowSize={this.props.pageSize} accountType={accountType} />
         <Services windowSize={this.props.pageSize} accountType={accountType} setAccountType={this.props.setAccountType} />
