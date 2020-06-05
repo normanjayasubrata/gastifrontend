@@ -1,0 +1,41 @@
+.button-disable {
+    background-color: "#00000029";
+    color: "#909090";
+    border: "none";
+    height: 3rem; 
+    margin-left: 1rem;
+}
+
+.button-active {
+    background-color: "#DF1C78";
+    border: "none";
+    height: 3rem;
+    margin-left: 1rem;
+}
+
+.font-weight-300 {
+    font-weight: 300;
+}
+
+.font-weight-200 {
+    font-weight: 200;
+}
+
+.width100 {
+    width: 100%;
+}
+
+.form-row {
+    margin-bottom: 10px;
+}
+
+.form-row-right {
+    margin-bottom: 10px;
+    float: right;
+}
+
+.border-black {
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 10px;
+}
