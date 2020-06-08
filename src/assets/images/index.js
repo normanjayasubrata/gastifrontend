@@ -19,6 +19,7 @@ import ico_coldstorage from "./ico_coldstorage.png";
 import ico_pin_sm from "./ico_pin_sm.png";
 import ico_shelf from "./ico_shelf.png";
 import star from "./star.png";
+import profilePicture from './img_profilepicture.png'
 
 export {
   cubicPic,
@@ -42,4 +43,5 @@ export {
   ico_pin_sm,
   ico_shelf,
   star,
+  profilePicture
 };
