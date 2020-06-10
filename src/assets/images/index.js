@@ -20,6 +20,8 @@ import ico_pin_sm from "./ico_pin_sm.png";
 import ico_shelf from "./ico_shelf.png";
 import star from "./star.png";
 import profilePicture from './img_profilepicture.png'
+import ico_blank_feature from './ico_blank_feature.png'
+import verified from './verified.png'
 
 export {
   cubicPic,
@@ -43,5 +45,7 @@ export {
   ico_pin_sm,
   ico_shelf,
   star,
-  profilePicture
+  profilePicture,
+  ico_blank_feature,
+  verified
 };

@@ -1,13 +1,18 @@
 import React, { Component } from "react";
-import { Container, Image, Row, Col, Button, Card } from "react-bootstrap";
+import { Container, Image, Row, Col, Button, Card, Breadcrumb } from "react-bootstrap";
+import axios from 'axios'
+import { Link } from "react-router-dom";
 import "./ResultPage.css"
 import {
   warehousePic,
   star,
   ico_pin_sm,
   profilePicture,
-  ico_coldstorage
+  ico_blank_feature,
+  verified
 } from "../assets/images";
+import StarRatingRender from '../components/StarRatingRender'
+
 
 export class ResultPageDetail extends Component {
   state = {
@@ -26,211 +31,108 @@ export class ResultPageDetail extends Component {
       {title: "Silver", price: "2,000,000", tonnage: "5-40"},
       {title: "Gold", price: "3,000,000", tonnage: "40-80"},
       {title: "Platinum", price: "4,000,000", tonnage: ">80"}
-    ],
-    detail: {
-      property_id: 1,
-      property_name: "Property1",
-      phone: "+62812123456789",
-      address: "Jalan Jakarta, No. 1, Kebayoran, Jakarta",
-      province: "jakarta",
-      city: "jakarta selatan",
-      district: "kebayoran lama",
-      sub_district: "selong",
-      zipcode: 12190,
-      latitude: -6.217893,
-      longitude: 106.804556,
-      property_size: 1,
-      photos: ["URL1", "URL2", "URL3", "URL4"],
-      property_rules: [
-        {
-          operational_hour_start: "08:00",
-          operational_hour_end: "17:00",
-          operational_day: ["day", "day", "day", "day", "day"],
-          holiday: "2019-01-01T10:00:00Z",
-        },
-      ],
-    },
+    ], 
+    detail: {},
+    ownerName: "Norman",
+    isVerified: true,
+    breadcrumbs: ["Gudang", "Jakarta", "Jakarta Selatan", "Tebet"]
   };
 
-  generateStar = (totalStar) => {
-    let starArray = [];
-    for (let index = 0; index < totalStar; index++) {
-      starArray.push("star");
-    }
-    return starArray;
-  };
-
+  componentDidMount() {
+    axios.get("http://private-anon-447e6fa740-gasti.apiary-mock.com/v1/property/2")
+    .then(res => {
+      console.log(res.data)
+      this.setState({detail: res.data})
+    })
+  }
+  
   render() {
     return (
       <div style={{ backgroundColor: "#F8F9FA", paddingTop: "2rem" }}>
-        <Container style={{paddingTop: "2rem", paddingBottom: "5rem"}}>
+        <Container style={{ paddingBottom: "5rem"}}>
           <Col>
-            <Row>
-              <div
-                style={{
-                  border: "solid #E4E4E4 1px",
-                  backgroundColor: "white",
-                  height: "11rem",
-                  width: "70rem",
-                  marginBottom: "2rem",
-                  borderRadius: "0.5rem",
-                }}
-              >
-                <Col
-                  className="align-content-around flex-wrap"
-                  style={{
-                    paddingLeft: "5rem",
-                    width: "48rem",
-                    height: "17rem",
-                  }}
-                >
-                  <Row style={{ paddingTop: "1rem" }}>
-                    <h2>norman</h2>
+            <Row style={{marginBottom: "1.5rem"}}>
+              {
+                this.state.breadcrumbs.map((breadcrumb, index) => {
+                  if (index === this.state.breadcrumbs.length - 1) {
+                    return (
+                      <div key={index}>
+                      <span style={{marginRight: "0.5rem", color: "#909090", fontSize: "14px"}}>{breadcrumb}</span>
+                      </div>
+                    )
+                  } else {
+                    return (
+                      <div key={index}>
+                      <span style={{marginRight: "0.5rem", color: "#909090", fontSize: "14px"}}>{breadcrumb}</span>
+                      <span style={{marginRight: "0.5rem", color: "#909090", fontSize: "14px"}}>/</span>
+                      </div>
+                     )
+                  }
+               
+                })
+              }
+
+            </Row>
+            <Row style={{ border: "solid #E4E4E4 1px", backgroundColor: "white", height: "8.688rem", width: "70rem", marginBottom: "2rem", borderRadius: "0.5rem", padding: "1.5rem"}} >
+                <Col className="align-content-around flex-wrap" style={{ paddingLeft: "2rem", width: "48rem", height: "17rem", }} >
+                  <Row>
+                    <h2 style={{fontSize: "24px"}}>{this.state.detail.property_name}</h2>
                   </Row>
-                  <Row style={{ marginTop: "1rem" }}>
+                  <Row>
                     <Col>
-                      {this.generateStar(4).map(() => {
-                        return (
-                          <Image
-                            src={star}
-                            width="25px"
-                            style={{ marginRight: "1rem" }}
-                          />
-                        );
-                      })}
+                      <StarRatingRender stars={4} review={{value:12, word:"Ulasan"}} />
                     </Col>
                   </Row>
-                  <Row style={{ paddingTop: "1rem", paddingRight: "5rem" }}>
-                    <Col>
-                      <Row style={{ paddingTop: "0.5rem" }}>
+                  <Row className="align-items-start" style={{ paddingRight: "5rem" }}>
                         <Image height="100%" src={ico_pin_sm} />
-                        <h6 style={{ fontWeight: "normal", color: "#909090" }}>
+                        <h6 style={{ fontWeight: "normal", color: "#909090", fontSize: "14px" }}>
                           {this.state.detail.address}
                         </h6>
-                      </Row>
-                    </Col>
-                    <Col style={{ marginRight: "-77px" }}>
-                      <Button
-                        variant="link"
-                        style={{ fontWeight: "bold", color: "green" }}
-                      >
-                        Lihat Peta
-                      </Button>
-                    </Col>
+                      <Link to="#" style={{ fontWeight: "normal", color: "#00C9A7", fontSize: "14px", marginLeft: "1.5rem" }} > Lihat Peta </Link>
                   </Row>
                 </Col>
-              </div>
             </Row>
             <Row>
               <Col>
-                <Row
-                  style={{
-                    backgroundColor: "blue",
-                    width: "44.875rem",
-                    height: "22.875rem",
-                  }}
-                >
-                  <Image
-                    src={warehousePic}
-                    width="718px"
-                    height="366px"
-                    rounded
-                  />
+                <Row style={{ backgroundColor: "blue", width: "44.875rem", height: "22.875rem", }} >
+                  <Image src={warehousePic} width="718px" height="366px" rounded />
                 </Row>
               </Col>
               <Col style={{ marginLeft: "1.125rem" }}>
-                <Row
-                  style={{
-                    backgroundColor: "red",
-                    width: "10.875rem",
-                    height: "10.875rem",
-                  }}
-                >
-                  <Image
-                    src={warehousePic}
-                    width="174px"
-                    height="174px"
-                    rounded
-                  />
+                <Row style={{ backgroundColor: "red", width: "10.875rem", height: "10.875rem", }} >
+                  <Image src={warehousePic} width="174px" height="174px" rounded />
                 </Row>
 
-                <Row
-                  style={{
-                    backgroundColor: "green",
-                    width: "10.875em",
-                    height: "10.875em",
-                    marginTop: "1.125rem",
-                  }}
-                >
-                  <Image
-                    src={warehousePic}
-                    width="174px"
-                    height="174px"
-                    rounded
-                  />
+                <Row style={{ backgroundColor: "green", width: "10.875em", height: "10.875em", marginTop: "1.125rem", }} >
+                  <Image src={warehousePic} width="174px" height="174px" rounded />
                 </Row>
               </Col>
               <Col style={{ marginLeft: "1.125rem" }}>
-                <Row
-                  style={{
-                    backgroundColor: "red",
-                    width: "10.875rem",
-                    height: "10.875rem",
-                  }}
-                >
-                  <Image
-                    src={warehousePic}
-                    width="174px"
-                    height="174px"
-                    rounded
-                  />
+                <Row style={{ backgroundColor: "red", width: "10.875rem", height: "10.875rem", }} >
+                  <Image src={warehousePic} width="174px" height="174px" rounded />
                 </Row>
 
-                <Row
-                  style={{
-                    backgroundColor: "green",
-                    width: "10.875rem",
-                    height: "10.875rem",
-                    marginTop: "1.125rem",
-                  }}
-                >
-                  <Image
-                    src={warehousePic}
-                    width="174px"
-                    height="174px"
-                    rounded
-                  />
+                <Row style={{ backgroundColor: "green", width: "10.875rem", height: "10.875rem", marginTop: "1.125rem", }} >
+                  <Image src={warehousePic} width="174px" height="174px" rounded />
                 </Row>
               </Col>
             </Row>
             <Row style={{ marginTop: "1rem", marginBottom: "1rem" }}>
               <Col style={{ backgroundColor: "white", border: "solid #E4E4E4 1px", height: "12rem", borderRadius: "0.5rem", marginRight: "1.2rem", }} >
-                <Row>
+                <Row className="justify-content-end" style={{padding: "3rem"}}>
                   <Col>
-                    <Image
-                      src={profilePicture}
-                      height="100px"
-                      width="100px"
-                      roundedCircle
-                    />
+                    <Image src={profilePicture} height="100px" width="100px" roundedCircle />
                   </Col>
-                  <Col>
+                  <Col style={{marginLeft: "-8rem", marginTop: "-1rem"}}>
                     <Row style={{ paddingTop: "1rem" }}>
-                      <h2>norman</h2>
+                      <h2 style={{fontSize: "16px"}}>{`Gudang ini dimiliki oleh ${this.state.ownerName}`}</h2>
+                      {this.state.isVerified ? <Image style={{marginLeft: "0.2rem", marginTop: "0.1rem"}} width={16} height={16} src={verified} /> : null}
                     </Row>
-                    <Row style={{ marginTop: "1rem" }}>
-                      {this.generateStar(4).map(() => {
-                        return (
-                          <Image
-                            src={star}
-                            width="25px"
-                            style={{ marginRight: "1rem" }}
-                          />
-                        );
-                      })}
+                    <Row style={{ marginTop: "0.5rem" }}>
+                      <StarRatingRender stars={5} review={{value:10, word:"Rating"}} style={{marginBottom: "-1.2rem", marginLeft: "0.2rem"}} />
                     </Row>
-                    <Row style={{ paddingTop: "1rem", paddingRight: "5rem" }}>
-                      <h6 style={{ fontWeight: "normal", color: "#909090" }}>
+                    <Row style={{ paddingTop: "1rem" }}>
+                      <h6 style={{ fontWeight: "normal", color: "#909090", fontSize: "14px" }}>
                         {this.state.detail.address}
                       </h6>
                     </Row>
@@ -289,7 +191,7 @@ export class ResultPageDetail extends Component {
                        return (
                        <Col key={index}>
                         <Row>
-                        <Image src={ico_coldstorage} style={{marginRight: "0.5rem"}} />
+                        <Image src={ico_blank_feature} style={{marginRight: "0.5rem"}} />
                         <h5>{feature}</h5>
                         </Row>
                        </Col>
@@ -303,7 +205,7 @@ export class ResultPageDetail extends Component {
                        return (
                        <Col key={index}>
                         <Row>
-                        <Image src={ico_coldstorage} style={{marginRight: "0.5rem"}} />
+                        <Image src={ico_blank_feature} style={{marginRight: "0.5rem"}} />
                         <h5>{feature}</h5>
                         </Row>
                        </Col>
@@ -333,7 +235,7 @@ export class ResultPageDetail extends Component {
                   <span style={{ fontSize: "10px"}}>{paket.tonnage} kg</span>
                  </Card.Text>
     
-                  <Button style={{backgroundColor: "#00C9A7", border: "none"}}>Go somewhere</Button>
+                  <Button style={{backgroundColor: "#00C9A7", border: "none", fontSize: "14px", fontWeight: "lighter", width: "100%", padding: "0.65rem"}}>Request Sewa Gudang</Button>
                 </Card.Body>
               </Card>
               ))
