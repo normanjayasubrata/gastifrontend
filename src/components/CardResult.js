@@ -3,6 +3,8 @@ import { Image, Row, Col, Button } from "react-bootstrap";
 import { warehousePic, star, ico_pin_sm, ico_shelf, ico_coldstorage } from "../assets/images";
 import { Link } from "react-router-dom";
 
+import StarRatingRender from '../components/StarRatingRender'
+
 export class CardResult extends Component {
 
   checkFacility = (facility) => {
@@ -18,17 +20,11 @@ export class CardResult extends Component {
     }
   }
 
-  generateStar = (totalStar) => {
-    let starArray = [];
-    for (let index = 0; index < totalStar; index++) {
-      starArray.push("star");
-    }
-    return starArray;
-  };
 
   render() {
 
     let facility = ["ico_shelf", "ico_coldstorage"]
+    const {propertiesResult} = this.props;
 
     return (
       <div
@@ -46,20 +42,12 @@ export class CardResult extends Component {
         <Col className="align-content-around flex-wrap" style={{ marginLeft: "25rem", width: "48rem", height: "17rem" }}>
           <Row style={{paddingTop: "1rem"}}>
             <Link to="/searchresult/detail">
-            <h2>norman</h2>
+            <h2>{propertiesResult.property_name}</h2>
             </Link>
           </Row>
           <Row style={{marginTop: "1rem"}}>
            <Col>
-           {this.generateStar(4).map(() => {
-            return (
-              <Image
-                src={star}
-                width="25px"
-                style={{ marginRight: "1rem" }}
-              />
-            );
-          })}
+          <StarRatingRender />
            </Col>
            <Col style={{marginRight: "-17rem"}}>
            <h6 style={{fontWeight: "normal", color: "#909090", textDecoration: "line-through"}}>{`~Rp 1,000.000`}</h6>
@@ -70,7 +58,7 @@ export class CardResult extends Component {
             <Row style={{paddingTop: "0.5rem"}}>
             <Image height="100%" src={ico_pin_sm} />
             <h6 style={{fontWeight: "normal", color: "#909090"}}>
-              Tebet, Jakarta Sealtan
+              {propertiesResult.address}
             </h6>
             </Row>
             </Col>

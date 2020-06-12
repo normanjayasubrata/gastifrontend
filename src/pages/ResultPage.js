@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
-// import axios from "axios";
-import {Image, Dropdown, Col, Row, Form } from "react-bootstrap";
+import axios from "axios";
+import {Image, Dropdown, Col, Row, Form, Container } from "react-bootstrap";
 
 import { star } from "../assets/images";
 
@@ -41,16 +41,13 @@ export class ResultPage extends Component {
     ],
   };
 
-  // componentDidMount() {
-  //     axios.get("https://private-b8e5e1-gasti.apiary-mock.com/v1/property/seach?locationID=&facilityID=&areaID=&rating=&priceMin=&priceMax=&page=&perPage=%27")
-  //     .then(res => {
-  //         console.log(res.data)
-
-  //         console.log(JSON.parse(`${res.data}`))
-  //         this.setState({propertyResult: res.data})
-  //     })
-  //     .catch(error => console.log(error))
-  // }
+  componentDidMount() {
+      axios.get("https://private-b8e5e1-gasti.apiary-mock.com/v1/property/seach?locationID=&facilityID=&areaID=&rating=&priceMin=&priceMax=&page=&perPage=%27")
+      .then(res => {
+          console.log(res.data)
+      })
+      .catch(error => console.log(error))
+  }
 
   generateStar = (totalStar) => {
     let starArray = [];
@@ -68,76 +65,78 @@ export class ResultPage extends Component {
     // const {windowWidth} = this.props.pageSize
     return (
       <div style={{ backgroundColor: "#F8F9FA"}}>
-        <Row style={{paddingLeft: "8.25rem", paddingRight: "9.25rem"}}>
-          <Col>
-            <Row style={{ paddingTop: "1rem" }}>
-              <div style={{textAlign: "center", paddingTop: "20%", width: "24rem", height: "14.875rem", backgroundColor: "white", borderRadius: "1rem", border: "1px solid #E4E4E4", }} >
-                <h1>Maps</h1>
-              </div>
-            </Row>
-            <Row style={{margin: "1rem"}}>
-              <h3>Filter</h3>
-            </Row>
-            <Row style={{width: "24rem", backgroundColor: "white", borderRadius: "1rem", border: "1px solid #E4E4E4", padding: "2rem"}}>
-            <Form>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Lokasi</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
-            </Form.Group>
-          
-            <Form.Group controlId="formBasicCheckbox">
-            <Form.Label>Fasilitas</Form.Label>
-              <Form.Check type="checkbox" label="Ruang Pendingin" />
-              <Form.Check type="checkbox" label="Rak" />
-            </Form.Group>
+       <Container style={{margin: "0", paddingLeft: "8rem", paddingRight: "12rem", paddingTop: "2rem", paddingBottom: "2rem"}}>
+       <Row lg={2}>
+       <Col>
+         <Row style={{ paddingTop: "1rem" }}>
+           <div style={{textAlign: "center", paddingTop: "20%", width: "24rem", height: "14.875rem", backgroundColor: "white", borderRadius: "1rem", border: "1px solid #E4E4E4", }} >
+             <h1>Maps</h1>
+           </div>
+         </Row>
+         <Row style={{margin: "1rem"}}>
+           <h3>Filter</h3>
+         </Row>
+         <Row style={{width: "24rem", backgroundColor: "white", borderRadius: "1rem", border: "1px solid #E4E4E4", padding: "2rem"}}>
+         <Form>
+         <Form.Group controlId="formBasicEmail">
+           <Form.Label>Lokasi</Form.Label>
+           <Form.Control type="email" placeholder="Enter email" />
+         </Form.Group>
+       
+         <Form.Group controlId="formBasicCheckbox">
+         <Form.Label>Fasilitas</Form.Label>
+           <Form.Check type="checkbox" label="Ruang Pendingin" />
+           <Form.Check type="checkbox" label="Rak" />
+         </Form.Group>
 
-            <Form.Group controlId="formBasicCheckbox">
-            <Form.Label>Area</Form.Label>
-              <Form.Check type="checkbox" label="Tebet" />
-              <Form.Check type="checkbox" label="Kalibata" />
-              <Form.Check type="checkbox" label="Cilandak" />
-              <Form.Check type="checkbox" label="Cijantung" />
-            </Form.Group>
+         <Form.Group controlId="formBasicCheckbox">
+         <Form.Label>Area</Form.Label>
+           <Form.Check type="checkbox" label="Tebet" />
+           <Form.Check type="checkbox" label="Kalibata" />
+           <Form.Check type="checkbox" label="Cilandak" />
+           <Form.Check type="checkbox" label="Cijantung" />
+         </Form.Group>
 
-            <Form.Group controlId="formBasicCheckbox">
-            <Form.Label>Peringkat</Form.Label>
-              <Form.Check type="checkbox" label= {this.generateStar(1).map(() => <Image src={star} width="15px" style={{ marginRight: "0.3rem" }} />)} />
-              <Form.Check type="checkbox" label= {this.generateStar(2).map(() => <Image src={star} width="15px" style={{ marginRight: "0.3rem" }} />)} />
-              <Form.Check type="checkbox" label= {this.generateStar(3).map(() => <Image src={star} width="15px" style={{ marginRight: "0.3rem" }} />)} />
-              <Form.Check type="checkbox" label= {this.generateStar(4).map(() => <Image src={star} width="15px" style={{ marginRight: "0.3rem" }} />)} />
-              <Form.Check type="checkbox" label= {this.generateStar(5).map(() => <Image src={star} width="15px" style={{ marginRight: "0.3rem" }} />)} />
-            </Form.Group>
+         <Form.Group controlId="formBasicCheckbox">
+         <Form.Label>Peringkat</Form.Label>
+           <Form.Check type="checkbox" label= {this.generateStar(1).map(() => <Image src={star} width="15px" style={{ marginRight: "0.3rem" }} />)} />
+           <Form.Check type="checkbox" label= {this.generateStar(2).map(() => <Image src={star} width="15px" style={{ marginRight: "0.3rem" }} />)} />
+           <Form.Check type="checkbox" label= {this.generateStar(3).map(() => <Image src={star} width="15px" style={{ marginRight: "0.3rem" }} />)} />
+           <Form.Check type="checkbox" label= {this.generateStar(4).map(() => <Image src={star} width="15px" style={{ marginRight: "0.3rem" }} />)} />
+           <Form.Check type="checkbox" label= {this.generateStar(5).map(() => <Image src={star} width="15px" style={{ marginRight: "0.3rem" }} />)} />
+         </Form.Group>
 
-            <Form.Group controlId="formBasicRange">
-            <Form.Label>Rentang Harga</Form.Label>
-            <Form.Control type="range" />
-          </Form.Group>
-          </Form>
-          </Row>
-          </Col>
-          <Col>
-            <Row className="justify-content-start align-items-center" style={{padding: '1rem'}}>
-               <h6 style={{color: "#909090", marginRight: "1rem"}}>Urutkan berdasarkan: </h6>
-              <Dropdown>
-              <Dropdown.Toggle variant="outline-dark" id="dropdown-basic">
-                {this.state.buttonSelceted}
-              </Dropdown.Toggle>
-            
-              <Dropdown.Menu>
-                <Dropdown.Item onClick={() => {this.setSortMethod("Rekomendasi")}}>Rekomendasi</Dropdown.Item>
-                <Dropdown.Item onClick={() => {this.setSortMethod("Harga Tertinggi")}}>Harga Tertinggi</Dropdown.Item>
-                <Dropdown.Item onClick={() => {this.setSortMethod("Harga Terendah")}}>Harga Terendah</Dropdown.Item>
-                <Dropdown.Item onClick={() => {this.setSortMethod("Peringkat Tertinggi")}}>Peringkat Tertinggi</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-            </Row>
-            <Row>
-              {this.state.propertyResult.map((propResults) => {
-                return <CardResult key={propResults.property_id} />;
-              })}
-            </Row>
-          </Col>
-        </Row>
+         <Form.Group controlId="formBasicRange">
+         <Form.Label>Rentang Harga</Form.Label>
+         <Form.Control type="range" />
+       </Form.Group>
+       </Form>
+       </Row>
+       </Col>
+       <Col>
+         <Row className="justify-content-start align-items-center" style={{padding: '1rem'}}>
+            <h6 style={{color: "#909090", marginRight: "1rem"}}>Urutkan berdasarkan: </h6>
+           <Dropdown>
+           <Dropdown.Toggle variant="outline-dark" id="dropdown-basic">
+             {this.state.buttonSelceted}
+           </Dropdown.Toggle>
+         
+           <Dropdown.Menu>
+             <Dropdown.Item onClick={() => {this.setSortMethod("Rekomendasi")}}>Rekomendasi</Dropdown.Item>
+             <Dropdown.Item onClick={() => {this.setSortMethod("Harga Tertinggi")}}>Harga Tertinggi</Dropdown.Item>
+             <Dropdown.Item onClick={() => {this.setSortMethod("Harga Terendah")}}>Harga Terendah</Dropdown.Item>
+             <Dropdown.Item onClick={() => {this.setSortMethod("Peringkat Tertinggi")}}>Peringkat Tertinggi</Dropdown.Item>
+           </Dropdown.Menu>
+         </Dropdown>
+         </Row>
+         <Row>
+           {this.state.propertyResult.map((propResults) => {
+             return <CardResult key={propResults.property_id} propertiesResult={propResults} />;
+           })}
+         </Row>
+       </Col>
+     </Row>
+       </Container>
     </div>
     );
   }
