@@ -344,7 +344,7 @@ export class AddPropertyPage extends Component {
             headers: {
                 // 'Content-Type': 'application/json'
                 'Content-Type': 'application/json',
-                'Authorization': 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTM5NDQzMTAsImlhdCI6MTU5MTM1MjMxMCwidmVyc2lvbiI6MSwiYWNjb3VudF9pZCI6MSwiYWNjb3VudF91c2VybmFtZSI6Iis2MjgxMjEyMzQ1Njc4MCIsImFjY291bnRfdHlwZSI6IkdVREFORyIsImFjY291bnRfcm9sZSI6IkFETUlOIn0.ImoVaJHbvdFRWsEZbiTNYCo0x_CzitBV9lNfSbBhiMFXi88IhhG-KkwHemIWI6OeceuB8e6JjyupvUuONBeedbTiI1yDe0JCpXlIsbATKLMcOsSOuLKU2VWdtmqrp4JcsRdB3OJ66szdlVYUeiDzCWfyQVhEBNIoF4ALPTTCqXgkGk6e6r6A368c0s83zoHo_jNgUklXP7swoo5z4QbOKUPywIr0nH5VE_IXd0mBt2OYpfeX6SOwYd3kmRLrmeG_JwHuipyISqSVI6oP05k7qmSTd3zuuGQrSRJoAIJ_BvRomJ6Lv_3AAHTdAotnIHnksl29Spf7etM7w7RngTB1PQ'
+                'Authorization': ''
             }
         }
 
