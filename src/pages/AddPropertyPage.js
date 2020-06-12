@@ -344,7 +344,7 @@ export class AddPropertyPage extends Component {
             headers: {
                 // 'Content-Type': 'application/json'
                 'Content-Type': 'application/json',
-                'Authorization': ''
+                'Authorization': ' '
             }
         }
 
