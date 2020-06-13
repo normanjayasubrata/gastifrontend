@@ -9,6 +9,7 @@ import Home from './pages/home'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import AddPropertyPage from './pages/AddPropertyPage'
+import ListPropertyPage from './pages/ListPropertyPage'
 import ResultPage from './pages/ResultPage'
 import ResultPageDetail from './pages/ResultPageDetail'
 
@@ -23,6 +24,7 @@ export class Routes extends Component {
               <Route exact path="/" component={Home} />
               <Route path="/login" component={LoginPage} />
               <Route path="/register" component={RegisterPage} />
+              <Route exact path="/gudang" component={ListPropertyPage} />
               <Route path="/gudang/tambah" component={AddPropertyPage} />
               <Route exact path="/searchresult" component={ResultPage} />
               <Route path="/searchresult/detail" component={ResultPageDetail} />
