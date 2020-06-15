@@ -5,8 +5,8 @@ import { gastiLogo } from "../../assets/images";
 const infos = [
   { title: "", value: "Jl. Lorem ipsum dolor sit amet" },
   { title: "", value: "Consectetur adipiscing elit" },
-  { title: "Phone : ", value: " 123456789" },
-  { title: "Email : ", value: " gasti@gasti.com" }
+  { title: "Phone : ", value: "123456789" },
+  { title: "Email : ", value: "gasti@gasti.com" }
 ]
 
 const Contact = props => {
@@ -20,12 +20,7 @@ const Contact = props => {
           title="main office"
           width={windowWidth * 0.8}
           height={windowHeight - 80}
-          // style={{paddingBottom: "5rem"}}
           src="https://maps.google.com/maps?ll=-6.224585500000001,106.8109673&q=Sudirman Central Busines District&t=&z=14&ie=UTF8&iwloc=&output=embed"
-        // frameborder="0"
-        // scrolling="no"
-        // marginheight="0"
-        // marginwidth="0"
         ></iframe>
       </Col>
       <Col style={{ paddingRight: "5rem", paddingTop: "4rem" }}>
@@ -50,7 +45,6 @@ const Contact = props => {
   )
 
   const mobileView = (
-
     <Container>
       <Row>
         <iframe
@@ -90,5 +84,3 @@ const Contact = props => {
 };
 
 export default Contact;
-
-// <style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style>

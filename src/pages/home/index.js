@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ReactSnapScroll from "react-snap-scroll";
 
 import { account_type } from "../../store/action";
+import { hasToken } from "../../store/localstorage/token";
 
 import "./index.css";
 import Search from "./Search";
@@ -13,8 +13,8 @@ import Contact from "./Contact";
 import TenantPage from './TenantPage';
 
 export class Home extends Component {
-  isLogin(pageSize, accountType, accountTypeID) {
-    return { accountTypeID } === 1 ? <Search windowSize={pageSize} accountType={accountType} /> : <TenantPage windowSize={this.props.pageSize} accountType={accountType} />;
+  isLogin(pageSize, accountType) {
+    return hasToken() ? <Search windowSize={pageSize} accountType={accountType} /> : <TenantPage windowSize={this.props.pageSize} accountType={accountType} />;
   }
 
   render() {
@@ -22,8 +22,7 @@ export class Home extends Component {
 
     return (
       <div style={{ height: "100%" }}>
-        {/* this.isLogin(this.props.pageSize, accountType, accountType.id) */}
-        <Search windowSize={this.props.pageSize} accountType={accountType} />
+        {this.isLogin(this.props.pageSize, accountType)}
         <About windowSize={this.props.pageSize} accountType={accountType} />
         <MediaPage windowSize={this.props.pageSize} accountType={accountType} />
         <Services windowSize={this.props.pageSize} accountType={accountType} setAccountType={this.props.setAccountType} />
