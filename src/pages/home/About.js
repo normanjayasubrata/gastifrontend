@@ -16,7 +16,7 @@ const infos = [
 
 
 const About = (props) => {
-  const { /* windowHeight,  */isNotMobile } = props.windowSize
+  const { isNotMobile } = props.windowSize
   return (
     <div
       style={{
@@ -24,8 +24,6 @@ const About = (props) => {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "-13rem top",
         marginTop: isNotMobile ? "10rem" : "1rem"
-        // height: isNotMobile ? `${windowHeight}px` : null
-
       }}
     >
       <Container>

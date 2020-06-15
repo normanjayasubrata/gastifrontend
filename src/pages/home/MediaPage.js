@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, Container, Col, Row } from "react-bootstrap";
-import { /* mediaBackground, */ warehousePic, cubic2, triangle2 } from "../../assets/images";
+import { warehousePic, cubic2, triangle2 } from "../../assets/images";
 
 const MediaPage = (props) => {
   const { windowHeight, isNotMobile } = props.windowSize;
@@ -12,11 +12,10 @@ const MediaPage = (props) => {
     height: `${windowHeight}px`,
     marginTop: "5rem"
   };
+
   const desktopView = (
-    <Container
-    >
-      <Col
-      >
+    <Container>
+      <Col>
         <Row className="justify-content-center">
           <div >
             <Image
@@ -24,7 +23,6 @@ const MediaPage = (props) => {
               style={isNotMobile ? { marginLeft: "-10.5rem", marginTop: "8rem", border: "solid white 0.6rem" } : { border: "solid white 0.6rem" }}
               width={isNotMobile ? "900px" : "100%"}
               height={isNotMobile ? "500px" : null}
-            // style={{border: "solid white 0.5rem"}}
             />
           </div>
         </Row>
@@ -33,13 +31,8 @@ const MediaPage = (props) => {
   )
 
   const mobileStyle = {
-    // backgroundColor: "#DCDCDC",
-    // width: windowWidth,
-    // margin: "4rem"
     height: `${windowHeight * 0.3}px`,
     paddingTop: "4rem"
-    // marginLeft: "3rem"
-    // padding: "4rem"
   }
 
   const mobileView = (
@@ -50,7 +43,6 @@ const MediaPage = (props) => {
             <Image
               src={warehousePic}
               width="100%"
-              // height={isNotMobile ? "500px" : null}
               style={{ border: "solid #DCDCDC 0.5rem" }}
             />
           </Row>
@@ -59,15 +51,8 @@ const MediaPage = (props) => {
     </div>
   )
   return (
-    <div
-      style={
-        isNotMobile ? desktopStyle : mobileStyle
-      }
-    >
-
-      {
-        isNotMobile ? desktopView : mobileView
-      }
+    <div style={isNotMobile ? desktopStyle : mobileStyle}>
+      {isNotMobile ? desktopView : mobileView}
     </div>
   );
 };

@@ -34,7 +34,7 @@ const accounts = [
 
 const Services = (props) => {
 
-  const { windowHeight, isNotMobile } = props.windowSize;
+  const { isNotMobile } = props.windowSize;
 
   const divStyleFull = {
     backgroundImage: `url(${lontong}), url(${triangle2}), url(${zigzag}), url(${liukan2}), url(${cubic3})`,
