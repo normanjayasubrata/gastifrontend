@@ -4,26 +4,77 @@ import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
 
 import { gastiLogo } from "../assets/images";
+import { hasToken, removeToken } from "../store/localstorage/token";
 
 export class NavBar extends Component {
-
   state = {
     windowWidth: 0,
     windowHeight: 0
   }
 
   updateDimensions = () => {
-    this.setState({ windowWidth: window.innerWidth, windowHeight: window.innerHeight });
+    this.setState({
+      windowWidth: window.innerWidth,
+      windowHeight: window.innerHeight
+    });
   };
 
   componentDidMount() {
-    this.setState({ windowWidth: window.innerWidth, windowHeight: window.innerHeight })
+    this.setState({
+      windowWidth: window.innerWidth,
+      windowHeight: window.innerHeight
+    })
     window.addEventListener('resize', this.updateDimensions);
   }
+
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateDimensions);
   }
+
+  logoutHandler = (event) => {
+    event.preventDefault();
+
+    removeToken();
+    window.location.reload(false);
+  }
+
   render() {
+    const navbarNotLogin = (
+      <Nav className="justify-content-end">
+        <Nav.Item>
+          <Link to="login">
+            <Button style={{ color: "#909090" }} variant="link">
+              Masuk
+            </Button>
+          </Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Link to="register">
+            <Button
+              style={{
+                backgroundColor: "#DF1C78",
+                border: "none",
+                width: "94px",
+                height: "42px",
+              }}
+            >
+              Daftar
+            </Button>
+          </Link>
+        </Nav.Item>
+      </Nav>
+    );
+
+    const navbarLogin = (
+      <Nav className="justify-content-end">
+        <Nav.Item>
+          <Button variant="danger" onClick={this.logoutHandler}>
+            Logout
+          </Button>
+        </Nav.Item>
+      </Nav >
+    );
+
     const { isNotMobile } = this.props.windowSize;
     let paddingLeftRight = isNotMobile ? "7.25rem" : "2rem";
     return (
@@ -43,29 +94,7 @@ export class NavBar extends Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Col>
-              <Nav className="justify-content-end">
-                <Nav.Item>
-                  <Link to="/login">
-                    <Button style={{ color: "#909090" }} variant="link">
-                      Masuk
-                  </Button>
-                  </Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Link to="/register">
-                    <Button
-                      style={{
-                        backgroundColor: "#DF1C78",
-                        border: "none",
-                        width: "94px",
-                        height: "42px",
-                      }}
-                    >
-                      Daftar
-                   </Button>
-                  </Link>
-                </Nav.Item>
-              </Nav>
+              {hasToken() ? navbarLogin : navbarNotLogin}
             </Col>
           </Navbar.Collapse>
         </Navbar>

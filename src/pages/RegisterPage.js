@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Form, Button, Container, Col, Row } from "react-bootstrap";
 import axios from 'axios';
 import lconfig from "../config"
+import { enter_auth_page } from "../store/action";
 
 export class RegisterPage extends Component {
   state = {
@@ -110,6 +111,7 @@ export class RegisterPage extends Component {
   };
 
   render() {
+    this.props.enterAuthPage();
     const { isNotMobile } = this.props;
     const paddingLefRight = isNotMobile ? "20rem" : "1rem";
     const inactiveButton = (
@@ -274,8 +276,8 @@ const mapStateToProps = (state) => ({
   accountType: state.accountReducer.accountType
 })
 
-const mapDispatchToProps = {
-
-}
+const mapDispatchToProps = dispatch => ({
+  enterAuthPage: () => dispatch(enter_auth_page())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage)
