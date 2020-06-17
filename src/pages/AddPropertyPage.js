@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import "../assets/index.css"
 import lconfig from "../config"
-import { hasToken } from "../store/localstorage/token";
+import { getToken, hasToken } from "../store/localstorage/token";
 
 export class AddPropertyPage extends Component {
     state = {
@@ -60,6 +60,7 @@ export class AddPropertyPage extends Component {
         classJumat: "none",
         classSabtu: "none",
         classMinggu: "none",
+        token: getToken()
     };
 
     onChangeHandler = (event) => {
@@ -347,7 +348,7 @@ export class AddPropertyPage extends Component {
             headers: {
                 // 'Content-Type': 'application/json'
                 'Content-Type': 'application/json',
-                'Authorization': ''
+                'Authorization': this.state.token
             }
         }
 
@@ -362,11 +363,11 @@ export class AddPropertyPage extends Component {
     }
 
     render() {
-        if (!hasToken()) {
+        if (this.state.token === "") {
             return <Redirect to={lconfig.LOGIN_URL} />
         } else {
             return (
-                <Container style={{ backgroundColor: "white", }}>
+                <Container style={{ backgroundColor: "white" }}>
                     <Row className="form-row" >
                         <h1 className="font-weight-300" >Tambah Gudang</h1>
                     </Row>
@@ -374,7 +375,7 @@ export class AddPropertyPage extends Component {
                         <p className="border-black">
                             Sebelum menambahkan gudang, pastikan gudang tersebut sudah sesuai dengan syarat ketentuan.
                             Semua gudang yang melanggar syarat dan ketentuan akan di non-aktifkan oleh tim kami.
-                    </p>
+                        </p>
                     </Row>
                     <Form>
                         <Row>
@@ -731,13 +732,13 @@ export class AddPropertyPage extends Component {
                         <Row className="form-row-right" >
                             <Button variant="primary" className="button-active" >
                                 Batal
-                        </Button>
+                            </Button>
                             <Button variant="primary" className="button-active" >
                                 Simpan & Tambah Baru
-                        </Button>
+                            </Button>
                             <Button variant="primary" onClick={this.onSimpanHandler} className="button-active" >
                                 Simpan
-                        </Button>
+                            </Button>
                         </Row>
                     </Form>
                 </Container >
