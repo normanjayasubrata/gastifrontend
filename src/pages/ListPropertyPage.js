@@ -120,17 +120,17 @@ class ListPropertyPage extends Component {
         })
 
         const options = {
-            page: 1,  // which page you want to show as default
-            sizePerPage: 5,  // which size per page you want to locate as default
-            pageStartIndex: 1, // where to start counting the pages
-            paginationSize: 3,  // the pagination bar size.
-            prePage: 'Sebelumnya', // Previous page button text
-            nextPage: 'Selanjutnya', // Next page button text
-            firstPage: 'Pertama', // First page button text
-            lastPage: 'Terakhir', // Last page button text
-            paginationShowsTotal: this.renderShowsTotal,  // Accept bool or function
-            paginationPosition: 'bottom',  // default is bottom, top and both is all available
-            hideSizePerPage: true, // You can hide the dropdown for sizePerPage
+            page: 1,
+            sizePerPage: 5,
+            pageStartIndex: 1,
+            paginationSize: 3,
+            prePage: 'Sebelumnya',
+            nextPage: 'Selanjutnya',
+            firstPage: 'Pertama',
+            lastPage: 'Terakhir',
+            paginationShowsTotal: this.renderShowsTotal,
+            paginationPosition: 'bottom',
+            hideSizePerPage: true,
             withFirstAndLast: false
         };
 
