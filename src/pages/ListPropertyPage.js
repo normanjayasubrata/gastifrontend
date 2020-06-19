@@ -1,27 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, Redirect } from "react-router-dom";
-import { Button, Container, Col, Row } from "react-bootstrap";
+import { Button, Container, Col, Row, DropdownButton, Dropdown } from "react-bootstrap";
 import axios from "axios"
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
+import BreadCrumps from "../components/BreadCrumps";
+import StarRatingRender from '../components/StarRatingRender'
 
 import lconfig from "../config"
 import { enter_auth_page } from "../store/action";
 import { getToken } from "../store/localstorage/token";
-
-function detailFormatter(cell) {
-    return `<div class="row">
-        <div class="col-md-3">
-            <div style="border:1px solid black; width:50px; height:50px; border-radius: 5px;"></div>
-        </div>
-        <div class="col-md-9">
-            <p class="margin0" style="font-weight:bold";>${cell.name}</p>
-            <p class="margin0" >*****</p>
-            <p class="text-muted">${cell.address}</p>
-        </div>
-    </div>`;
-}
 
 function renterFormatter(cell) {
     return `<div class="row">
@@ -50,7 +39,7 @@ function staffFormatter(cell) {
     </div>`;
 }
 
-function actionFormatter() {
+function actionFormatter_bak() {
     return `<div class="row">
         <div class="col">
             <p><a href="#" class="text-decoration-none table-link">Ubah Data</a></p>
@@ -63,10 +52,50 @@ function actionFormatter() {
 
 class ListPropertyPage extends Component {
     state = {
-        properties: "",
+        // properties: "",
         token: getToken(),
-        properties: "",
+        properties: [],
+        tableSortSelected: "Terbaru",
+        tableFilterSelected: "Semua Gudang",
+        breadcrumps: ["Dashboard", "Daftar Gudang"]
     }
+
+    componentDidMount() {
+        axios.get("https://private-12204a-gasti.apiary-mock.com/v1/property")
+        .then(res => {
+            console.log(res.data.properties)
+            this.setState({properties: res.data.properties})
+        })
+        .catch(error => console.log(error))
+    }
+
+    detailFormatter = (cell) => {
+        return (<div className="row">
+        <div className="col-md-3">
+            <div style={{border:"1px solid black", width:"50px", height:"50px", borderRadius: "5px"}}></div>
+        </div>
+        <div className="col-md-9">
+            <p className="margin0" style={{fontWeight: "bold"}}>{cell.name}</p>
+            <StarRatingRender stars={4} style={{marginTop: "0.5rem", marginBottom: "0.5rem", marginLeft: "0rem"}} />
+            <p className="location">{cell.address}</p>
+        </div>
+    </div>);
+    }
+
+    actionFormatter = () => {
+        return (
+        <Row>
+            <Col style={{fontSize: "14px"}}>
+                <p><a href="#" style={{color: "#00C9A7"}}>Ubah Data</a></p>
+                <p><a href="#" className="text-decoration-none text-muted">Tambah Staff</a></p>
+                <p><a href="#" className="text-decoration-none text-muted">Putus Kontrak</a></p>
+                <p><a href="#" className="text-decoration-none text-muted">Hapus Gudang</a></p>
+            </Col>
+        </Row>
+        )
+    }
+    
+
 
     getListProperty() {
         if (this.state.properties != "") {
@@ -79,7 +108,8 @@ class ListPropertyPage extends Component {
             }
         }
 
-        let url = lconfig.API_BASE_URL + '/v1/property'
+        // let url = lconfig.API_BASE_URL + '/v1/property'
+        let url = 'http://private-anon-c8b8f56438-gasti.apiary-mock.comShow/v1/property'
         let self = this
         axios.get(url, config)
             .then(function (response) {
@@ -138,49 +168,86 @@ class ListPropertyPage extends Component {
             mode: 'checkbox'
         };
 
-        if (this.state.token === "") {
-            return <Redirect to={lconfig.LOGIN_URL} />
-        } else {
+        // if (this.state.token === "") {
+        //     return <Redirect to={lconfig.LOGIN_URL} />
+        // } else {
             return (
-                <Container style={{ backgroundColor: "white" }}>
-                    {this.getListProperty()}
-                    <Row className="form-row" >
-                        <Col md="10">
-                            <h3 >Daftar Gudang</h3>
-                        </Col>
-                        <Col>
-                            <Link to="/gudang/tambah">
-                                <Button variant="primary" className="button-active" >
-                                    Tambah Gudang
-                            </Button>
-                            </Link>
-                        </Col>
-                    </Row>
-                    <Row>
+                <div className="page">
+                <Container>
+                {/* this.getListProperty() */}
+                <Row>
+                <BreadCrumps breadcrumbs={this.state.breadcrumps} style={{marginLeft: "0rem"}} />
+              </Row>
+                <Row className="align-items-center page-row">
+                <Col>
+                  <h1 className="page-title" style={{marginLeft: "-1rem"}}>Daftar Gudang</h1>
+                </Col>
+                <Col>
+                  <Row className="justify-content-end">
+                    <Link to="/gudang/tambah">
+                      <Button className="button-green"> + Tambah Gudang</Button>
+                    </Link>
+                  </Row>
+                </Col>
+              </Row>
+                <Row>
+                    <Col className="table-box">
+                        <Row className="table-filter justify-content-between">
+                        <Row className="table-filter-button">
+                        <p>Filter</p>
+                        <Dropdown style={{padding: "0"}}>
+                        <Dropdown.Toggle className="button-filter-white"  id="dropdown-basic">
+                          {this.state.tableFilterSelected}
+                        </Dropdown.Toggle>
+                      
+                        <Dropdown.Menu>
+                          <Dropdown.Item href="#/action-1">Semua Gudang</Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
+                        </Row>
+                        <Row className="table-filter-button">
+                        <p>Urutkan</p>
+                        <Dropdown style={{padding: "0"}}>
+                        <Dropdown.Toggle className="button-filter-white"  id="dropdown-basic">
+                          {this.state.tableSortSelected}
+                        </Dropdown.Toggle>
+                      
+                        <Dropdown.Menu>
+                          <Dropdown.Item href="#/action-1">Terbaru</Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
+                        </Row>
+                      
+                        </Row>
+                        <Row>
                         <BootstrapTable
-                            data={property}
-                            selectRow={selectRowProp}
-                            pagination={true}
-                            options={options}
-                            bordered={false}
-                            tableHeaderClass='table-header'
-                        >
-                            <TableHeaderColumn
-                                tdAttr={{ 'colSpan': 2 }}
-                                colSpan="2"
-                                dataField='detail'
-                                dataFormat={detailFormatter}
-                                isKey
-                            >Nama Gudang</TableHeaderColumn>
-                            <TableHeaderColumn dataField='renter' dataFormat={renterFormatter} >*Penyewa*</TableHeaderColumn>
-                            <TableHeaderColumn dataField='stock' dataFormat={stockFormatter} dataSort={true} >*Stock*</TableHeaderColumn>
-                            <TableHeaderColumn dataField='staff' dataFormat={staffFormatter} dataSort={true} >Jumlah Staff</TableHeaderColumn>
-                            <TableHeaderColumn dataField='action' dataFormat={actionFormatter} >Action</TableHeaderColumn>
-                        </BootstrapTable>
-                    </Row>
-                </Container >
+                        tableHeaderClass="table-header"
+                        tableStyle={ { border: 'none' } }
+                        data={property}
+                        selectRow={selectRowProp}
+                        pagination={true}
+                        options={options}
+                        bordered={false}
+                    >
+                        <TableHeaderColumn
+                            tdAttr={{ 'colSpan': 2 }}
+                            colSpan="2"
+                            dataField='detail'
+                            dataFormat={this.detailFormatter}
+                            isKey
+                        >Nama Gudang</TableHeaderColumn>
+                        <TableHeaderColumn dataField='renter' dataFormat={renterFormatter} >Penyewa</TableHeaderColumn>
+                        <TableHeaderColumn dataField='stock' dataFormat={stockFormatter} dataSort={true} >Stock</TableHeaderColumn>
+                        <TableHeaderColumn dataField='staff' dataFormat={staffFormatter} dataSort={true} >Jumlah Staff</TableHeaderColumn>
+                        <TableHeaderColumn dataField='action' dataFormat={this.actionFormatter} >Action</TableHeaderColumn>
+                    </BootstrapTable>
+                        </Row>
+                    </Col>
+                </Row>
+                    </Container >
+                </div>
             )
-        }
+        //  }
     }
 }
 
