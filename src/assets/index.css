@@ -177,4 +177,69 @@ th {
     color: #909090;
     font-size: 14px;
   }
+
+  .sidebar {
+    margin-top: -0.2rem;
+    border: solid #E4E4E4 1px;
+    height: 100%;
+    position: fixed;
+    width: 4.563rem;
+    background-color: white;
+    padding: 0rem;
+  }
+
+ .open {
+      width: 20.375rem;
+  }
+
+  .sidebar-button {
+    background-color: white;
+    border: none;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+ 
+
+  .sidebar-button div {
+    width: 30px;
+    height: 4px;
+    background-color: #B4B4B4;
+    margin: 6px 0;
+  }
+
+  .sidebar-button-close {
+    color: #B4B4B4;
+    border: none;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .sidebar-profile {
+      background-color:#E4E4E4;
+      height: 5.5rem;
+      width: 100%;
+      padding-top: 30%;
+      padding-left: 20%;
+  }
+
+  .sidebar-profile div {
+      background-color: white;
+      width: 2.625rem;
+      height: 2.625rem;
+      border-radius: 50%;
+  }
+
+  .sidebar-box {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: #B4B4B4;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+  }
+
+.active-box {
+    background-color: #DF1C78;
+  }
   

@@ -14,7 +14,7 @@ import TenantPage from './TenantPage';
 
 export class Home extends Component {
   isLogin(pageSize, accountType) {
-    return hasToken() ? <Search windowSize={pageSize} accountType={accountType} /> : <TenantPage windowSize={this.props.pageSize} accountType={accountType} />;
+    return hasToken() ? <TenantPage windowSize={pageSize} accountType={accountType} /> : <Search windowSize={this.props.pageSize} accountType={accountType} />;
   }
 
   render() {
