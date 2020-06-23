@@ -15,6 +15,7 @@ import ListPropertyPage from './pages/ListPropertyPage'
 import AddPropertyPage from './pages/AddPropertyPage'
 import ResultPage from './pages/ResultPage'
 import ResultPageDetail from './pages/ResultPageDetail'
+import AddBrandPage from './pages/AddBrandPage'
 
 class Routes extends Component {
   state = {
@@ -32,28 +33,28 @@ class Routes extends Component {
         <Router basename={process.env.PUBLIC_URL}>
 
           <div style={{ height: "100%" }}>
-
-            {/* !this.props.isAuthPage ? <NavBar /> : null */}
+            {!this.props.isAuthPage ? <NavBar /> : null}
             <OffCanvas width={300} transitionDuration={300} effect={"parallax"} isMenuOpened={this.state.isMenuOpened} position={"left"} >
-            <OffCanvasBody>
-            {this.state.isMenuOpened ? null : <SideBar handleClick={this.handleClick}  />}
+              <OffCanvasBody>
+                {this.state.isMenuOpened ? null : <SideBar handleClick={this.handleClick} />}
 
-            <Switch>
-              <Route exact path="/" component={ListPropertyPage} />
-              <Route path="/login" component={LoginPage} />
-              <Route path="/register" component={RegisterPage} />
-              <Route exact path="/gudang" component={ListPropertyPage} />
-              <Route path="/gudang/tambah" component={AddPropertyPage} />
-              <Route exact path="/searchresult" component={ResultPage} />
-              <Route path="/searchresult/detail" component={ResultPageDetail} />
-              <Route path="*" component={NotFound} />
-            </Switch>
-            </OffCanvasBody>
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route path="/login" component={LoginPage} />
+                  <Route path="/register" component={RegisterPage} />
+                  <Route exact path="/gudang" component={ListPropertyPage} />
+                  <Route path="/gudang/tambah" component={AddPropertyPage} />
+                  <Route path="/brand/tambah" component={AddBrandPage} />
+                  <Route exact path="/searchresult" component={ResultPage} />
+                  <Route path="/searchresult/detail" component={ResultPageDetail} />
+                  <Route path="*" component={NotFound} />
+                </Switch>
+              </OffCanvasBody>
 
-            <OffCanvasMenu position="right" width={1000} >
-            <SideBarMenu handleClick={this.handleClick} />
-          </OffCanvasMenu>
-            
+              <OffCanvasMenu position="right" width={1000} >
+                <SideBarMenu handleClick={this.handleClick} />
+              </OffCanvasMenu>
+
             </OffCanvas>
 
           </div>
