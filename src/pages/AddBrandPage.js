@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import "../assets/index.css"
 import lconfig from "../config"
-import { getToken, hasToken } from "../store/localstorage/token";
+import { getToken } from "../store/localstorage/token";
 
 export class AddBrandPage extends Component {
     state = {
@@ -42,7 +42,11 @@ export class AddBrandPage extends Component {
                     })
                 })
                 .catch(function (error) {
-                    alert(JSON.stringfy(error.response.data))
+                    if (error.response != undefined) {
+                        alert(JSON.stringfy(error.response.data))
+                    } else {
+                        alert("Get Bank (" + error + ")")
+                    }
                 });
         }
     }
@@ -127,7 +131,11 @@ export class AddBrandPage extends Component {
                 // console.log("response : " + JSON.stringify(response.data));
             })
             .catch(function (error) {
-                alert(JSON.stringify(error.response.error))
+                if (error.response != undefined) {
+                    alert(JSON.stringfy(error.response.data))
+                } else {
+                    alert("Simpan Button (" + error + ")")
+                }
             });
     }
 
