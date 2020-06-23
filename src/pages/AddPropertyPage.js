@@ -355,10 +355,17 @@ export class AddPropertyPage extends Component {
         let url = lconfig.API_BASE_URL + '/v1/property'
         axios.post(url, data, config)
             .then(function (response) {
-                console.log("response : " + JSON.stringify(response.data));
+                // console.log("response : " + JSON.stringify(response.data));
+
+                // TO DO : Norman
+                // tambahin redirect nya
             })
             .catch(function (error) {
-                console.log(JSON.stringify(error.response.data))
+                if (error.response != undefined) {
+                    alert(JSON.stringfy(error.response.data))
+                } else {
+                    alert("Simpan Button (" + error + ")")
+                }
             });
     }
 
