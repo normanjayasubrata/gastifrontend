@@ -36,8 +36,6 @@ export class AddBrandPage extends Component {
         if (this.state.needGetBank) {
             axios.get(url, config)
                 .then(function (response) {
-                    console.log("get bank")
-                    console.log(response.data.data)
                     self.setState({
                         banks: response.data.data,
                         needGetBank: false
@@ -115,7 +113,6 @@ export class AddBrandPage extends Component {
             bank_account: this.state.form.bankAccount,
         })
 
-        console.log(data)
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -126,10 +123,11 @@ export class AddBrandPage extends Component {
         let url = lconfig.API_BASE_URL + '/v1/brand'
         axios.post(url, data, config)
             .then(function (response) {
-                console.log("response : " + JSON.stringify(response.data));
+                // Add something here
+                // console.log("response : " + JSON.stringify(response.data));
             })
             .catch(function (error) {
-                console.log(JSON.stringify(error.response.error))
+                alert(JSON.stringify(error.response.error))
             });
     }
 
