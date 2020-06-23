@@ -176,7 +176,7 @@ export class RegisterPage extends Component {
                     <Form.Control onChange={this.onChangeHandler} name="email" />
                     <Form.Text className="text-muted">
                       Contoh: gudang@gasti.com
-                         </Form.Text>
+                    </Form.Text>
                   </Form.Group>
 
                   <Form.Group>
