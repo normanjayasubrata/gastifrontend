@@ -1,3 +1,19 @@
+.page {
+    background-color: #f8f9fa;
+    padding-top: 3rem;
+    height: 100%;
+  }
+  
+.page-title {
+    font-size: 24px;
+    margin-left: 2rem;
+}  
+
+.page-row {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
 .button-disable {
     background-color: "#00000029";
     color: "#909090";
@@ -29,10 +45,24 @@
     margin-bottom: 10px;
 }
 
+.form-row h1 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }  
+
 .form-row-right {
     margin-bottom: 10px;
     float: right;
 }
+
+.form-box {
+    border: solid#E4E4E4 1px;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: 2rem;
+  }  
 
 .border-black {
     border: 1px solid black;
@@ -61,10 +91,155 @@ th {
 }
 
 .react-bs-table {
-    border: 1px solid #ddd;
+    border: 1px solid #00c9a7;
     border-radius: 5px;
 }
 
 .table-header {
-    background: #f4f4f4;
+    background: #F4F4F4;
 }
+
+.table-box {
+    border: #E4E4E4 solid 1px;
+    background-color: white;
+    border-radius: 0.5rem;
+}
+
+.table-filter {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.table-filter-button p {
+    color: #909090;
+    font: 14px;
+    margin-top: 0.3rem;
+    margin-right: 0.5rem;
+}
+
+.button-green {
+    border: #00c9a7 solid 1px;
+    background-color: #00c9a7;
+    color: white;
+    width: 13.25rem;
+    height: 3.125rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  
+  .button-white {
+    border: #e4e4e4 solid 1px;
+    background-color: white;
+    color: #909090;
+    width: 13.25rem;
+    height: 3.125rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .button-filter-white {
+    padding: 0;
+    border: #e4e4e4 solid 1px;
+    background-color: white;
+    color: black;
+    width: 10.875rem;
+    height: 2rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  
+  .picture-thumbnail {
+      width: 9.375rem;
+      height: 9.375rem;
+      margin-left: 1rem;
+      margin-right: 1rem;
+  }
+  
+  .upload-picture {
+      width: 9.375rem;
+      height: 9.375rem;
+      border: solid #E4E4E4 1px;
+      border-radius: 0.5rem;
+      background-color: white;
+      font-size: 16px;
+      color: black;
+      margin-left: 1rem;
+      margin-right: 1rem;
+  }
+
+  .location {
+    background-image: url("../assets/images/ico_pin_sm.png");
+    background-repeat: no-repeat;
+    background-position-y: .1rem;
+    padding-left: 1.5rem;
+    color: #909090;
+    font-size: 14px;
+  }
+
+  .sidebar {
+    margin-top: -0.2rem;
+    border: solid #E4E4E4 1px;
+    height: 100%;
+    position: fixed;
+    width: 4.563rem;
+    background-color: white;
+    padding: 0rem;
+  }
+
+ .open {
+      width: 20.375rem;
+  }
+
+  .sidebar-button {
+    background-color: white;
+    border: none;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+ 
+
+  .sidebar-button div {
+    width: 30px;
+    height: 4px;
+    background-color: #B4B4B4;
+    margin: 6px 0;
+  }
+
+  .sidebar-button-close {
+    color: #B4B4B4;
+    border: none;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .sidebar-profile {
+      background-color:#E4E4E4;
+      height: 5.5rem;
+      width: 100%;
+      padding-top: 30%;
+      padding-left: 20%;
+  }
+
+  .sidebar-profile div {
+      background-color: white;
+      width: 2.625rem;
+      height: 2.625rem;
+      border-radius: 50%;
+  }
+
+  .sidebar-box {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: #B4B4B4;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+  }
+
+.active-box {
+    background-color: #DF1C78;
+  }
+  

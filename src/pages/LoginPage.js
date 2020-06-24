@@ -34,7 +34,6 @@ class LoginPage extends Component {
                     }
                 }
             }
-
         })
         setTimeout(() => {
             this.validateAll();
@@ -85,7 +84,11 @@ class LoginPage extends Component {
                 window.location.reload(false);
             })
             .catch(function (error) {
-                alert(error.response.data.error.toString())
+                if (error.response != undefined) {
+                    alert(JSON.stringfy(error.response.data))
+                } else {
+                    alert("Login (" + error + ")")
+                }
             });
     }
 

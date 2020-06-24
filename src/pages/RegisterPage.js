@@ -104,10 +104,14 @@ export class RegisterPage extends Component {
     let url = lconfig.API_BASE_URL + '/v1/account/register'
     axios.post(url, data, config)
       .then(function (response) {
-        console.log("response : " + JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
-        console.log(JSON.stringify(error.response.data))
+        if (error.response != undefined) {
+          alert(JSON.stringfy(error.response.data))
+        } else {
+          alert("Register (" + error + ")")
+        }
       });
   };
 
@@ -176,7 +180,7 @@ export class RegisterPage extends Component {
                     <Form.Control onChange={this.onChangeHandler} name="email" />
                     <Form.Text className="text-muted">
                       Contoh: gudang@gasti.com
-                         </Form.Text>
+                    </Form.Text>
                   </Form.Group>
 
                   <Form.Group>
