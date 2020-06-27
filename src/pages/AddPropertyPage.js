@@ -362,7 +362,7 @@ export class AddPropertyPage extends Component {
             })
             .catch(function (error) {
                 if (error.response != undefined) {
-                    alert(JSON.stringfy(error.response.data))
+                    alert(error.response.data.error)
                 } else {
                     alert("Simpan Button (" + error + ")")
                 }
