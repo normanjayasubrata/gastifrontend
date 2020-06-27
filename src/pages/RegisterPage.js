@@ -161,7 +161,7 @@ export class RegisterPage extends Component {
                   <Link to="/Login">
                     <p style={{ fontWeight: "bold", color: "#DF1C78" }}>
                       Masuk
-                         </p>
+                    </p>
                   </Link>
                 </span>
               </Row>
