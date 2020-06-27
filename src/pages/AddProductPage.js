@@ -9,9 +9,9 @@ import lconfig from "../config"
 import { getToken, hasToken } from "../store/localstorage/token";
 
 export class AddProductPage extends Component {
-    // minimumPemesanan, commerce, kadaluarsa
     state = {
         form: {
+            brand: "",
             namaProduct: "",
             kategoriProduct: "",
             minimumPemesanan: "",
@@ -36,13 +36,66 @@ export class AddProductPage extends Component {
             kadaluarsa: ""
         },
         classKadaluarsa: "none",
+        brands: "",
+        needGetBrand: true,
         isAllValidated: false,
         token: getToken()
     };
 
+    getBrand() {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': this.state.token
+            }
+        }
+
+        let url = lconfig.API_BASE_URL + '/v1/brand'
+        let self = this
+        if (this.state.needGetBrand) {
+            axios.get(url, config)
+                .then(function (response) {
+                    self.setState({
+                        brands: response.data.brands,
+                        needGetBrand: false
+                    })
+                })
+                .catch(function (error) {
+                    if (error.response != undefined) {
+                        alert(error.response.data.error)
+                    } else {
+                        alert("Get Brand (" + error + ")")
+                    }
+                });
+        }
+    }
+
+    renderBrand() {
+        if (this.state.brands != "") {
+            const brands = this.state.brands.map(
+                (brand) =>
+                    <option value={brand.brand_id}>{brand.brand_name}</option>
+            );
+
+            return (
+                <Form.Control as="select" onChange={this.onChangeHandler} name="brand" >
+                    <option value="0">Pilih brand</option>
+                    {brands}
+                </Form.Control>
+            );
+        } else {
+            return (
+                <Form.Control disabled as="select" onChange={this.onChangeHandler} name="brand" >
+                    <option value="">Brand Not Found</option>
+                </Form.Control>
+            )
+        }
+    }
+
     onChangeHandler = (event) => {
         const { id, value, type, name, checked } = event.target;
-
+        console.log(name)
+        console.log(value)
         this.setState((state) => {
             if (type === "checkbox") {
                 if (checked) {
@@ -83,6 +136,7 @@ export class AddProductPage extends Component {
     };
 
     validateAll = () => {
+        let validBrand = this.state.form.brand.trim() !== "0";
         let validNamaProduct = this.state.form.namaProduct.trim() !== "";
         let validKategoriProduct = this.state.form.kategoriProduct.trim() !== "";
         let validMinimumPemesanan = this.state.form.minimumPemesanan.trim() !== "";
@@ -123,7 +177,8 @@ export class AddProductPage extends Component {
             validKadaluarsa = this.state.form.kadaluarsa.trim() !== "";
         }
 
-        if (validNamaProduct &&
+        if (validBrand &&
+            validNamaProduct &&
             validKategoriProduct &&
             validMinimumPemesanan &&
             validHargaProduct &&
@@ -193,21 +248,22 @@ export class AddProductPage extends Component {
         }
 
         let data = JSON.stringify({
-            brand_id: 1,
+            brand_id: parseInt(this.state.form.brand),
             product_name: this.state.form.namaProduct,
             product_category: this.state.form.kategoriProduct,
-            stock: stock,
-            price: this.state.form.hargaProduct,
-            width: this.state.form.volumePanjang,
-            length: this.state.form.volumeLebar,
-            height: this.state.form.volumeTinggi,
+            stock: parseInt(stock),
+            price: parseInt(this.state.form.hargaProduct),
+            width: parseInt(this.state.form.volumePanjang),
+            length: parseInt(this.state.form.volumeLebar),
+            height: parseInt(this.state.form.volumeTinggi),
             length_measurement: this.state.form.satuanVolumeProduct,
-            weight: this.state.form.beratProduct,
+            weight: parseInt(this.state.form.beratProduct),
             weight_measurement: this.state.form.satuanBeratProduct,
             sku: this.state.form.skuProduct,
-            commerce: filteredCommerce,
+            commerces: filteredCommerce,
             expired: kadaluarsa,
-            handling: filteredHandlingBarang
+            handlings: filteredHandlingBarang,
+            minimum_order: parseInt(this.state.form.minimumPemesanan)
         })
 
         const config = {
@@ -217,13 +273,19 @@ export class AddProductPage extends Component {
             }
         }
 
-        let url = lconfig.API_BASE_URL + '/v1/property'
+        let url = lconfig.API_BASE_URL + '/v1/product'
         axios.post(url, data, config)
             .then(function (response) {
                 console.log("response : " + JSON.stringify(response.data));
+                // TO DO NORMAN
+                // ADD redirect page
             })
             .catch(function (error) {
-                console.log(JSON.stringify(error.response.data))
+                if (error.response != undefined) {
+                    alert(error.response.data.error)
+                } else {
+                    alert("Simpan Button (" + error + ")")
+                }
             });
     }
 
@@ -233,6 +295,7 @@ export class AddProductPage extends Component {
         // } else {
         return (
             <Container style={{ backgroundColor: "white" }}>
+                {this.getBrand()}
                 <Row className="form-row" >
                     <h1 className="font-weight-300" >Tambah Product</h1>
                 </Row>
@@ -246,6 +309,18 @@ export class AddProductPage extends Component {
                     <Row>
                         <Col>
                             <Container>
+                                <Row className="form-row">
+                                    <p style={{ fontWeight: "bold" }} >Informasi Product</p>
+                                </Row>
+                                <Row className="form-row" style={{ borderBottom: "solid #00000029 1px", }}>
+                                    <Form.Group as={Row} controlId="formBrand" className="width100">
+                                        <Form.Label column md="3">Pilih Brand</Form.Label>
+                                        <Col md={9}>
+                                            {this.renderBrand()}
+                                        </Col>
+                                    </Form.Group>
+                                </Row>
+                                {/* ------------------------------------------- */}
                                 <Row className="form-row">
                                     <p style={{ fontWeight: "bold" }} >Informasi Product</p>
                                 </Row>
@@ -270,6 +345,7 @@ export class AddProductPage extends Component {
                                         <Form.Label column md="3">Kategori</Form.Label>
                                         <Col md={9}>
                                             <Form.Control as="select" onChange={this.onChangeHandler} name="kategoriProduct" >
+                                                <option>Pilih Kategori</option>
                                                 <option>FASHION</option>
                                                 <option>FROZEN FOOD</option>
                                                 <option>FRESH GROCERY</option>
@@ -357,9 +433,10 @@ export class AddProductPage extends Component {
                                         <Form.Label column md="3">Berat</Form.Label>
                                         <Col md={3}>
                                             <Form.Control as="select" onChange={this.onChangeHandler} name="satuanBeratProduct" >
-                                                <option>Kilogram (Kg)</option>
-                                                <option>Gram (G)</option>
-                                                <option>Liter (L)</option>
+                                                <option>Pilih Satuan</option>
+                                                <option value="KG">Kilogram (Kg)</option>
+                                                <option value="G">Gram (G)</option>
+                                                <option value="L">Liter (L)</option>
                                             </Form.Control>
                                         </Col>
                                         <Col md={6}>
@@ -372,9 +449,10 @@ export class AddProductPage extends Component {
                                         <Form.Label column md="3">Volume</Form.Label>
                                         <Col md={3}>
                                             <Form.Control as="select" onChange={this.onChangeHandler} name="satuanVolumeProduct" >
-                                                <option>Kilometer (Km)</option>
-                                                <option>Meter (M)</option>
-                                                <option>Centimeter (Cm)</option>
+                                                <option>Pilih Satuan</option>
+                                                <option value="KM">Kilometer (Km)</option>
+                                                <option value="M">Meter (M)</option>
+                                                <option value="CM">Centimeter (Cm)</option>
                                             </Form.Control>
                                         </Col>
                                         <Col md={2}>
@@ -408,10 +486,10 @@ export class AddProductPage extends Component {
                                             <Form.Check onChange={this.onChangeHandler} inline label="Amplop" value="AMPLOP" type="checkbox" name="handlingBarangAmplop" id="checkboxHandlingBarangAmplop" />
                                         </Col>
                                         <Col md={2}>
-                                            <Form.Check onChange={this.onChangeHandler} inline label="Kotak Kayu" value="KAYU" type="checkbox" name="handlingBarangKayu" id="checkboxHandlingBarangKayu" />
+                                            <Form.Check onChange={this.onChangeHandler} inline label="Kotak Kayu" value="KOTAK KAYU" type="checkbox" name="handlingBarangKayu" id="checkboxHandlingBarangKayu" />
                                         </Col>
                                         <Col md={2}>
-                                            <Form.Check onChange={this.onChangeHandler} inline label="Bubble Wrap" value="BUBBLE" type="checkbox" name="handlingBarangBubble" id="checkboxHandlingBarangBubble" />
+                                            <Form.Check onChange={this.onChangeHandler} inline label="Bubble Wrap" value="BUBBLE WRAP" type="checkbox" name="handlingBarangBubble" id="checkboxHandlingBarangBubble" />
                                         </Col>
                                     </Form.Group>
                                 </Row>
@@ -419,7 +497,7 @@ export class AddProductPage extends Component {
                                 <Row className="form-row">
                                     <p style={{ fontWeight: "bold" }} >Masa Berlaku</p>
                                 </Row>
-                                <Row className="form-row">
+                                <Row className="form-row" style={{ borderBottom: "solid #00000029 1px", }}>
                                     <Form.Group as={Row} controlId="formKadaluarsa" className="width100">
                                         <Form.Label column md="3">Kadaluarsa</Form.Label>
                                         <Col md={1}>
