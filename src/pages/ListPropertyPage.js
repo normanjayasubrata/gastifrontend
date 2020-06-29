@@ -12,43 +12,7 @@ import lconfig from "../config"
 import { enter_auth_page } from "../store/action";
 import { getToken } from "../store/localstorage/token";
 
-function renterFormatter(cell) {
-    return `<div class="row">
-        <div class="col">
-            <p class="margin0" style="fontWeight:bold;">${cell.name}</p>
-            <p class="text-muted">${cell.package}</p>
-        </div>
-    </div>`;
-}
 
-function stockFormatter(cell) {
-    return `<div class="row">
-        <div class="col">
-            <p class="margin0" style="fontWeight:bold;">${cell}</p>
-            <p class="text-muted">Barang</p>
-        </div>
-    </div>`;
-}
-
-function staffFormatter(cell) {
-    return `<div class="row">
-        <div class="col">
-            <p class="margin0" style="fontWeight:bold;">${cell}</p>
-            <p class="text-muted">Orang</p>
-        </div>
-    </div>`;
-}
-
-function actionFormatter_bak() {
-    return `<div class="row">
-        <div class="col">
-            <p><a href="#" class="text-decoration-none table-link">Ubah Data</a></p>
-            <p><a href="#" class="text-decoration-none text-muted">Tambah Staff</a></p>
-            <p><a href="#" class="text-decoration-none text-muted">Putus Kontrak</a></p>
-            <p><a href="#" class="text-decoration-none text-muted">Hapus Gudang</a></p>
-        </div>
-    </div>`;
-}
 
 class ListPropertyPage extends Component {
     state = {
@@ -60,14 +24,14 @@ class ListPropertyPage extends Component {
         breadcrumps: ["Dashboard", "Daftar Gudang"]
     }
 
-    componentDidMount() {
-        axios.get("https://private-12204a-gasti.apiary-mock.com/v1/property")
-        .then(res => {
-            console.log(res.data.properties)
-            this.setState({properties: res.data.properties})
-        })
-        .catch(error => console.log(error))
-    }
+    // componentDidMount() {
+    //     axios.get("https://private-12204a-gasti.apiary-mock.com/v1/property")
+    //     .then(res => {
+    //         console.log(res.data.properties)
+    //         this.setState({properties: res.data.properties})
+    //     })
+    //     .catch(error => console.log(error))
+    // }
 
     detailFormatter = (cell) => {
         return (<div className="row">
@@ -94,6 +58,33 @@ class ListPropertyPage extends Component {
         </Row>
         )
     }
+
+     renterFormatter = (cell) => {
+        return (<Row>
+            <Col>
+                <p class="margin0" style="fontWeight:bold;">${cell.name}</p>
+                <p class="text-muted">${cell.package}</p>
+            </Col>
+        </Row>);
+    }
+    
+     stockFormatter = (cell) => {
+        return (<Row>
+            <Col>
+                <p class="margin0" style="fontWeight:bold;">${cell}</p>
+                <p class="text-muted">Barang</p>
+            </Col>
+        </Row>);
+    }
+    
+     staffFormatter = (cell) => {
+        return (<Row>
+            <Col>
+                <p class="margin0" style="fontWeight:bold;">${cell}</p>
+                <p class="text-muted">Orang</p>
+            </Col>
+        </Row>);
+    }
     
 
 
@@ -108,8 +99,8 @@ class ListPropertyPage extends Component {
             }
         }
 
-        // let url = lconfig.API_BASE_URL + '/v1/property'
-        let url = 'http://private-anon-c8b8f56438-gasti.apiary-mock.comShow/v1/property'
+        let url = lconfig.API_BASE_URL + '/v1/property'
+        // let url = 'http://private-anon-c8b8f56438-gasti.apiary-mock.comShow/v1/property'
         let self = this
         axios.get(url, config)
             .then(function (response) {
@@ -174,7 +165,7 @@ class ListPropertyPage extends Component {
             return (
                 <div className="page">
                 <Container>
-                {/* this.getListProperty() */}
+                {this.getListProperty()}
                 <Row>
                 <BreadCrumps breadcrumbs={this.state.breadcrumps} style={{marginLeft: "0rem"}} />
               </Row>
@@ -236,9 +227,9 @@ class ListPropertyPage extends Component {
                             dataFormat={this.detailFormatter}
                             isKey
                         >Nama Gudang</TableHeaderColumn>
-                        <TableHeaderColumn dataField='renter' dataFormat={renterFormatter} >Penyewa</TableHeaderColumn>
-                        <TableHeaderColumn dataField='stock' dataFormat={stockFormatter} dataSort={true} >Stock</TableHeaderColumn>
-                        <TableHeaderColumn dataField='staff' dataFormat={staffFormatter} dataSort={true} >Jumlah Staff</TableHeaderColumn>
+                        <TableHeaderColumn dataField='renter' dataFormat={this.renterFormatter} >Penyewa</TableHeaderColumn>
+                        <TableHeaderColumn dataField='stock' dataFormat={this.stockFormatter} dataSort={true} >Stock</TableHeaderColumn>
+                        <TableHeaderColumn dataField='staff' dataFormat={this.staffFormatter} dataSort={true} >Jumlah Staff</TableHeaderColumn>
                         <TableHeaderColumn dataField='action' dataFormat={this.actionFormatter} >Action</TableHeaderColumn>
                     </BootstrapTable>
                         </Row>
