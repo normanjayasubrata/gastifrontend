@@ -14,6 +14,7 @@ class LoginPage extends Component {
         form: {
             phoneNumber: "",
             password: "",
+            accountType: "GUDANG"
         },
         isAgree: false,
         isAllValidated: false,
@@ -67,8 +68,7 @@ class LoginPage extends Component {
         }
 
         let data = JSON.stringify({
-            account_type: 'GUDANG',
-            account_role: 'ADMIN',
+            account_type: this.state.form.accountType,
             auth: {
                 username: phone,
                 password: this.state.form.password
@@ -85,7 +85,7 @@ class LoginPage extends Component {
             })
             .catch(function (error) {
                 if (error.response != undefined) {
-                    alert(JSON.stringfy(error.response.data))
+                    alert(error.response.data.error)
                 } else {
                     alert("Login (" + error + ")")
                 }
@@ -98,12 +98,12 @@ class LoginPage extends Component {
         const inactiveButton = (
             <Button variant="primary" type="submit" style={{ width: "100%", backgroundColor: "#00000029", color: "#909090", border: "none", height: "3rem" }} disabled>
                 Masuk
-          </Button>
+            </Button>
         )
         const activeButton = (
             <Button variant="primary" type="submit" style={{ width: "100%", backgroundColor: "#DF1C78", border: "none", height: "3rem" }} >
                 Masuk
-          </Button>
+            </Button>
         )
 
         if (hasToken()) {
@@ -130,10 +130,16 @@ class LoginPage extends Component {
                                             {!isNaN(this.state.form.phoneNumber) ? "contoh: 081234567890" : "fill with number"}
                                         </Form.Text>
                                     </Form.Group>
-
                                     <Form.Group>
                                         <Form.Label>Password</Form.Label>
                                         <Form.Control type="password" name="password" onChange={this.onChangeHandler} value={this.state.form.password} />
+                                    </Form.Group>
+                                    <Form.Group>
+                                        <Form.Label>Login Sebagai</Form.Label>
+                                        <Form.Control as="select" onChange={this.onChangeHandler} name="accountType" >
+                                            <option value="GUDANG">Pemilik Gudang</option>
+                                            <option value="USAHA">Pemilik Usaha</option>
+                                        </Form.Control>
                                     </Form.Group>
                                     <Form.Group>
                                         <Row className="justify-content-center">

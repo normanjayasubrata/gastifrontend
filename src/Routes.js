@@ -44,12 +44,17 @@ class Routes extends Component {
                   <Route exact path="/" component={Home} />
                   <Route path="/login" component={LoginPage} />
                   <Route path="/register" component={RegisterPage} />
+
                   <Route exact path="/gudang" component={ListPropertyPage} />
                   <Route path="/gudang/tambah" component={AddPropertyPage} />
-                  <Route path="/brand/tambah" component={AddBrandPage} />
+
                   <Route exact path="/searchresult" component={ResultPage} />
                   <Route path="/searchresult/detail" component={ResultPageDetail} />
+
+                  <Route path="/brand/tambah" component={AddBrandPage} />
+
                   <Route path="/product/tambah" component={AddProductPage} />
+
                   <Route path="*" component={NotFound} />
                 </Switch>
               </OffCanvasBody>

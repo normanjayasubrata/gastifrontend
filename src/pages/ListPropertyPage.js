@@ -24,38 +24,43 @@ class ListPropertyPage extends Component {
         breadcrumps: ["Dashboard", "Daftar Gudang"]
     }
 
-    // componentDidMount() {
-    //     axios.get("https://private-12204a-gasti.apiary-mock.com/v1/property")
-    //     .then(res => {
-    //         console.log(res.data.properties)
-    //         this.setState({properties: res.data.properties})
-    //     })
-    //     .catch(error => console.log(error))
-    // }
+    componentDidMount() {
+        axios.get("https://private-12204a-gasti.apiary-mock.com/v1/property")
+            .then(res => {
+                this.setState({ properties: res.data.properties })
+            })
+            .catch(error => {
+                if (error.response != undefined) {
+                    alert(error.response.data.error)
+                } else {
+                    alert("Simpan Button (" + error + ")")
+                }
+            })
+    }
 
     detailFormatter = (cell) => {
         return (<div className="row">
-        <div className="col-md-3">
-            <div style={{border:"1px solid black", width:"50px", height:"50px", borderRadius: "5px"}}></div>
-        </div>
-        <div className="col-md-9">
-            <p className="margin0" style={{fontWeight: "bold"}}>{cell.name}</p>
-            <StarRatingRender stars={4} style={{marginTop: "0.5rem", marginBottom: "0.5rem", marginLeft: "0rem"}} />
-            <p className="location">{cell.address}</p>
-        </div>
-    </div>);
+            <div className="col-md-3">
+                <div style={{ border: "1px solid black", width: "50px", height: "50px", borderRadius: "5px" }}></div>
+            </div>
+            <div className="col-md-9">
+                <p className="margin0" style={{ fontWeight: "bold" }}>{cell.name}</p>
+                <StarRatingRender stars={4} style={{ marginTop: "0.5rem", marginBottom: "0.5rem", marginLeft: "0rem" }} />
+                <p className="location">{cell.address}</p>
+            </div>
+        </div>);
     }
 
     actionFormatter = () => {
         return (
-        <Row>
-            <Col style={{fontSize: "14px"}}>
-                <p><a href="#" style={{color: "#00C9A7"}}>Ubah Data</a></p>
-                <p><a href="#" className="text-decoration-none text-muted">Tambah Staff</a></p>
-                <p><a href="#" className="text-decoration-none text-muted">Putus Kontrak</a></p>
-                <p><a href="#" className="text-decoration-none text-muted">Hapus Gudang</a></p>
-            </Col>
-        </Row>
+            <Row>
+                <Col style={{ fontSize: "14px" }}>
+                    <p><a href="#" style={{ color: "#00C9A7" }}>Ubah Data</a></p>
+                    <p><a href="#" className="text-decoration-none text-muted">Tambah Staff</a></p>
+                    <p><a href="#" className="text-decoration-none text-muted">Putus Kontrak</a></p>
+                    <p><a href="#" className="text-decoration-none text-muted">Hapus Gudang</a></p>
+                </Col>
+            </Row>
         )
     }
 
@@ -162,8 +167,8 @@ class ListPropertyPage extends Component {
         // if (this.state.token === "") {
         //     return <Redirect to={lconfig.LOGIN_URL} />
         // } else {
-            return (
-                <div className="page">
+        return (
+            <div className="page">
                 <Container>
                 {this.getListProperty()}
                 <Row>

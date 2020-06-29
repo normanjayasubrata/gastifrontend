@@ -43,7 +43,7 @@ export class AddBrandPage extends Component {
                 })
                 .catch(function (error) {
                     if (error.response != undefined) {
-                        alert(JSON.stringfy(error.response.data))
+                        alert(error.response.data.error)
                     } else {
                         alert("Get Bank (" + error + ")")
                     }
@@ -132,7 +132,7 @@ export class AddBrandPage extends Component {
             })
             .catch(function (error) {
                 if (error.response != undefined) {
-                    alert(JSON.stringfy(error.response.data))
+                    alert(error.response.data.error)
                 } else {
                     alert("Simpan Button (" + error + ")")
                 }
@@ -194,7 +194,6 @@ export class AddBrandPage extends Component {
                                         <Form.Group as={Row} controlId="formBank" className="width100">
                                             <Form.Label column md="3">Nama Bank</Form.Label>
                                             <Col md={3}>
-                                                {/* <Bank banks={this.state.banks} /> */}
                                                 {this.renderBank()}
                                             </Col>
                                         </Form.Group>
