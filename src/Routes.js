@@ -58,7 +58,7 @@ class Routes extends Component {
                   <Route path="*" component={NotFound} />
                 </Switch>
               </OffCanvasBody>
-
+ 
               <OffCanvasMenu position="right" width={1000} >
                 <SideBarMenu handleClick={this.handleClick} />
               </OffCanvasMenu>
