@@ -13,6 +13,7 @@ import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import ListPropertyPage from './pages/ListPropertyPage'
 import AddPropertyPage from './pages/AddPropertyPage'
+import AddProductPage from './pages/AddProductPage'
 import ResultPage from './pages/ResultPage'
 import ResultPageDetail from './pages/ResultPageDetail'
 import AddBrandPage from './pages/AddBrandPage'
@@ -48,6 +49,7 @@ class Routes extends Component {
                   <Route path="/brand/tambah" component={AddBrandPage} />
                   <Route exact path="/searchresult" component={ResultPage} />
                   <Route path="/searchresult/detail" component={ResultPageDetail} />
+                  <Route path="/product/tambah" component={AddProductPage} />
                   <Route path="*" component={NotFound} />
                 </Switch>
               </OffCanvasBody>
