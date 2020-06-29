@@ -9,6 +9,7 @@
     margin-left: 2rem;
 }  
 
+
 .page-row {
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -179,7 +180,37 @@ th {
   }
 
   .sidebar {
-    margin-top: -0.2rem;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    min-height: 100vh !important;
+    z-index: 100;
+    padding: 48px 0 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    width: 7rem;
+}
+.sidebar-wrapper{
+    min-height: 100vh !important;
+    width: 100vw;
+    margin-left: -1rem;
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
+}
+.sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+}
+
+.page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+}
+
+  .sidebar {
+    margin-top: 5rem;
     border: solid #E4E4E4 1px;
     height: 100%;
     position: fixed;
@@ -189,7 +220,9 @@ th {
   }
 
  .open {
-      width: 20.375rem;
+      width: 15.375rem;
+      padding-left: 3rem;
+      font-size: 14px;
   }
 
   .sidebar-button {
@@ -236,10 +269,21 @@ th {
     background-color: #B4B4B4;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    cursor: pointer;
+  }
 
+  .sidebar-box p {
+      margin-left: 3rem;
+      margin-top: 0.1rem;
+      white-space: nowrap;
+  }
+
+  .submenu {
+      background-color: white;
   }
 
 .active-box {
     background-color: #DF1C78;
+    color: #DF1C78;
+    font-weight: bolder;
   }
-  

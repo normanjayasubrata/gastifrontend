@@ -31,12 +31,13 @@ class Routes extends Component {
     return (
       <div style={{ height: "100%" }}>
         <Router basename={process.env.PUBLIC_URL}>
+        {!this.props.isAuthPage ? <NavBar /> : null}
 
           <div style={{ height: "100%" }}>
-            {!this.props.isAuthPage ? <NavBar /> : null}
-            <OffCanvas width={300} transitionDuration={300} effect={"parallax"} isMenuOpened={this.state.isMenuOpened} position={"left"} >
-              <OffCanvasBody>
-                {this.state.isMenuOpened ? null : <SideBar handleClick={this.handleClick} />}
+          {this.state.isMenuOpened ? null : <SideBar handleClick={this.handleClick} />}
+
+            <OffCanvas width={300} transitionDuration={300} isMenuOpened={this.state.isMenuOpened} position={"left"} >
+            <OffCanvasBody>
 
                 <Switch>
                   <Route exact path="/" component={Home} />
