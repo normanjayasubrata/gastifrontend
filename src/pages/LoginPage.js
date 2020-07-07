@@ -9,6 +9,7 @@ import { enter_auth_page, exit_auth_page } from "../store/action";
 import { setToken, hasToken } from "../store/localstorage/token";
 import { gastiLogo } from "../assets/images";
 
+import { AccountLogin } from "../api/account";
 class LoginPage extends Component {
     state = {
         form: {
@@ -77,10 +78,14 @@ class LoginPage extends Component {
 
         let url = lconfig.API_BASE_URL + '/v1/auth/login'
         let self = this
-        axios.post(url, data, config)
+        // axios.post(url, data, config)
+        AccountLogin(data)
             .then(function (response) {
+                console.log(response)
                 self.setState({ token: JSON.stringify(response.data.value) })
                 setToken(response.data.value)
+                self.props.history.push("/gudang")
+
                 window.location.reload(false);
             })
             .catch(function (error) {
