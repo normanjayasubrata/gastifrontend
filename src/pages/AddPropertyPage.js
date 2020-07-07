@@ -5,12 +5,11 @@ import axios from "axios";
 import lconfig from "../config";
 import "../assets/index.css";
 import { warehousePic } from "../assets/images";
-import BreadCrumps from '../components/BreadCrumps'
+import { PostProperty } from "../api/property";
+import BreadCrumps from "../components/BreadCrumps";
 
 export class AddPropertyPage extends Component {
-  state = {
-    breadcrumps: ["Dashboard", "WMS", "Tambah Gudang"],
-    pictureUploaded: [warehousePic, warehousePic],
+  initialState = {
     form: {
       namaGudang: "",
       nomorTelepon: "",
@@ -63,9 +62,88 @@ export class AddPropertyPage extends Component {
     classMinggu: "none",
   };
 
+  state = {
+    breadcrumps: ["Dashboard", "WMS", "Tambah Gudang"],
+    pictureUploaded: [warehousePic, warehousePic],
+    form: {
+      namaGudang: "",
+      nomorTelepon: "",
+      alamatGudang: "",
+      provinsi: "",
+      kota: "",
+      kecamatan: "",
+      kelurahan: "",
+      kodePos: "",
+      layananLayananPendingin: "",
+      layananLayananRak: "",
+      layananlayananCCTV: "",
+      layananRuangan: "",
+      layananPaket: "",
+      pengirimanFrequency: "",
+      hariPengirimanSenin: "",
+      jamOperasionalSeninDari: "",
+      jamOperasionalSeninSampai: "",
+      hariPengirimanSelasa: "",
+      jamOperasionalSelasaDari: "",
+      jamOperasionalSelasaSampai: "",
+      hariPengirimanRabu: "",
+      jamOperasionalRabuDari: "",
+      jamOperasionalRabuSampai: "",
+      hariPengirimanKamis: "",
+      jamOperasionalKamisDari: "",
+      jamOperasionalKamisSampai: "",
+      hariPengirimanJumat: "",
+      jamOperasionalJumatDari: "",
+      jamOperasionalJumatSampai: "",
+      hariPengirimanSabtu: "",
+      jamOperasionalSabtuDari: "",
+      jamOperasionalSabtuSampai: "",
+      hariPengirimanMinggu: "",
+      jamOperasionalMingguDari: "",
+      jamOperasionalMingguSampai: "",
+      pengirimanLogisticInstant: "",
+      pengirimanLogisticSameday: "",
+      pengirimanCOD: "",
+      pengirimanDropship: "",
+      pengirimanRetur: "",
+    },
+    checkSenin: false,
+    checkSelasa: false,
+    checkRabu: false,
+    checkKamis: false,
+    checkJumat: false,
+    checkSabtu: false,
+    checkMinggu: false,
+    checkboxPengirimanCOD: false,
+    checkboxPengirimanLogisticInstant: false,
+    checkboxPengirimanLogisticSameDay: false,
+    checkboxPengirimanDropship: false,
+    checkboxPengirimanRetur: false,
+    checkboxLayananLayananPendingin: false,
+    checkboxLayananLayananRak: false,
+    checkboxLayananlayananCCTV: false,
+    radioPengirimanFrequencySatu: false,
+    radioPengirimanFrequencyDua: false,
+    radioPengirimanFrequencyLebihDariDua: false,
+    radioLayananPaketBronze: false,
+    radioLayananPaketSilver: false,
+    radioLayananPaketGold: false,
+    radioLayananRuanganSmall: false,
+    radioLayananRuanganMedium: false,
+    radioLayananRuanganLarge: false,
+    isAllValidated: false,
+    classSenin: "none",
+    classSelasa: "none",
+    classRabu: "none",
+    classKamis: "none",
+    classJumat: "none",
+    classSabtu: "none",
+    classMinggu: "none",
+  };
+
   onChangeHandler = (event) => {
     const { id, value, type, name, checked } = event.target;
-
+    console.log(id);
     this.setState((state) => {
       if (type === "checkbox") {
         if (checked) {
@@ -89,45 +167,147 @@ export class AddPropertyPage extends Component {
       switch (id) {
         case "checkboxHariPengirimanSenin":
           if (checked) {
-            return { classSenin: "block" };
+            return { checkSenin: true, classSenin: "block" };
           } else {
-            return { classSenin: "none" };
+            return { checkSenin: false, classSenin: "none" };
           }
         case "checkboxHariPengirimanSelasa":
           if (checked) {
-            return { classSelasa: "block" };
+            return { checkSelasa: true, classSelasa: "block" };
           } else {
-            return { classSelasa: "none" };
+            return { checkSelasa: false, classSelasa: "none" };
           }
         case "checkboxHariPengirimanRabu":
           if (checked) {
-            return { classRabu: "block" };
+            return { checkRabu: true, classRabu: "block" };
           } else {
-            return { classRabu: "none" };
+            return { checkRabu: false, classRabu: "none" };
           }
         case "checkboxHariPengirimanKamis":
           if (checked) {
-            return { classKamis: "block" };
+            return { checkKamis: true, classKamis: "block" };
           } else {
-            return { classKamis: "none" };
+            return { checkKamis: false, classKamis: "none" };
           }
         case "checkboxHariPengirimanJumat":
           if (checked) {
-            return { classJumat: "block" };
+            return { checkJumat: true, classJumat: "block" };
           } else {
-            return { classJumat: "none" };
+            return { checkJumat: false, classJumat: "none" };
           }
         case "checkboxHariPengirimanSabtu":
           if (checked) {
-            return { classSabtu: "block" };
+            return { checkSabtu: true, classSabtu: "block" };
           } else {
-            return { classSabtu: "none" };
+            return { checkSabtu: false, classSabtu: "none" };
           }
         case "checkboxHariPengirimanMinggu":
           if (checked) {
-            return { classMinggu: "block" };
+            return { checkMinggu: true, classMinggu: "block" };
           } else {
-            return { classMinggu: "none" };
+            return { checkMinggu: false, classMinggu: "none" };
+          }
+        case "checkboxPengirimanCOD":
+          if (checked) {
+            return { checkboxPengirimanCOD: true };
+          } else {
+            return { checkboxPengirimanCOD: false };
+          }
+        case "checkboxPengirimanLogisticInstant":
+          if (checked) {
+            return { checkboxPengirimanLogisticInstant: true };
+          } else {
+            return { checkboxPengirimanLogisticInstant: false };
+          }
+        case "checkboxPengirimanLogisticSameDay":
+          if (checked) {
+            return { checkboxPengirimanLogisticSameDay: true };
+          } else {
+            return { checkboxPengirimanLogisticSameDay: false };
+          }
+        case "checkboxPengirimanDropship":
+          if (checked) {
+            return { checkboxPengirimanDropship: true };
+          } else {
+            return { checkboxPengirimanDropship: false };
+          }
+        case "checkboxPengirimanRetur":
+          if (checked) {
+            return { checkboxPengirimanRetur: true };
+          } else {
+            return { checkboxPengirimanRetur: false };
+          }
+        case "checkboxLayananLayananPendingin":
+          if (checked) {
+            return { checkboxLayananLayananPendingin: true };
+          } else {
+            return { checkboxLayananLayananPendingin: false };
+          }
+        case "checkboxLayananLayananRak":
+          if (checked) {
+            return { checkboxLayananLayananRak: true };
+          } else {
+            return { checkboxLayananLayananRak: false };
+          }
+        case "checkboxLayananlayananCCTV":
+          if (checked) {
+            return { checkboxLayananlayananCCTV: true };
+          } else {
+            return { checkboxLayananlayananCCTV: false };
+          }
+        case "radioPengirimanFrequencySatu":
+          if (checked) {
+            return { radioPengirimanFrequencySatu: true };
+          } else {
+            return { radioPengirimanFrequencySatu: false };
+          }
+        case "radioPengirimanFrequencyDua":
+          if (checked) {
+            return { radioPengirimanFrequencyDua: true };
+          } else {
+            return { radioPengirimanFrequencyDua: false };
+          }
+        case "radioPengirimanFrequencyLebihDariDua":
+          if (checked) {
+            return { radioPengirimanFrequencyLebihDariDua: true };
+          } else {
+            return { radioPengirimanFrequencyLebihDariDua: false };
+          }
+        case "radioLayananPaketBronze":
+          if (checked) {
+            return { radioLayananPaketBronze: true };
+          } else {
+            return { radioLayananPaketBronze: false };
+          }
+        case "radioLayananPaketSilver":
+          if (checked) {
+            return { radioLayananPaketSilver: true };
+          } else {
+            return { radioLayananPaketSilver: false };
+          }
+        case "radioLayananPaketGold":
+          if (checked) {
+            return { radioLayananPaketGold: true };
+          } else {
+            return { radioLayananPaketGold: false };
+          }
+        case "radioLayananRuanganSmall":
+          if (checked) {
+            return { radioLayananRuanganSmall: true };
+          } else {
+            return { radioLayananRuanganSmall: false };
+          }
+        case "radioLayananRuanganMedium":
+          if (checked) {
+            return { radioLayananRuanganMedium: true };
+          } else {
+            return { radioLayananRuanganMedium: false };
+          }
+        case "radioLayananRuanganLarge":
+          if (checked) {
+            return { radioLayananRuanganLarge: true };
+          } else {
+            return { radioLayananRuanganLarge: false };
           }
       }
     });
@@ -136,8 +316,46 @@ export class AddPropertyPage extends Component {
     }, 100);
   };
 
+  onClearChange = () => {
+    this.setState({ form: this.initialState.form });
+    const days = [
+      "Senin",
+      "Selasa",
+      "Rabu",
+      "Kamis",
+      "Jumat",
+      "Sabtu",
+      "Minggu",
+    ];
+    days.map((day) => {
+      this.setState({ ["class" + day]: "none", ["check" + day]: false });
+    });
+    const checkboxes = [
+      "checkboxPengirimanCOD",
+      "checkboxPengirimanLogisticInstant",
+      "checkboxPengirimanLogisticSameDay",
+      "checkboxPengirimanDropship",
+      "checkboxPengirimanRetur",
+      "checkboxLayananLayananPendingin",
+      "checkboxLayananLayananRak",
+      "checkboxLayananlayananCCTV",
+      "radioPengirimanFrequencySatu",
+      "radioPengirimanFrequencyDua",
+      "radioPengirimanFrequencyLebihDariDua",
+      "radioLayananPaketBronze",
+      "radioLayananPaketSilver",
+      "radioLayananPaketGold",
+      "radioLayananRuanganSmall",
+      "radioLayananRuanganMedium",
+      "radioLayananRuanganLarge",
+    ];
+    checkboxes.map((checkbox) => {
+      console.log(checkbox);
+      this.setState({ [checkbox]: false });
+    });
+  };
+
   validateAll = () => {
-    console.log(this.state.form);
     let validNamaGudang = this.state.form.namaGudang.trim() !== "";
     let validNomorTelepon = this.state.form.nomorTelepon.trim() !== "";
     let validAlamatGudang = this.state.form.alamatGudang.trim() !== "";
@@ -196,6 +414,7 @@ export class AddPropertyPage extends Component {
 
   onSimpanHandler = (event) => {
     event.preventDefault();
+    console.log(event.target.name);
 
     if (!this.state.isAllValidated) {
       return alert("Lengkapi form pengisian");
@@ -341,20 +560,19 @@ export class AddPropertyPage extends Component {
       retur: retur,
     });
 
-    const config = {
-      headers: {
-        // 'Content-Type': 'application/json'
-        "Content-Type": "application/json",
-        Authorization:
-          "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTM5NDQzMTAsImlhdCI6MTU5MTM1MjMxMCwidmVyc2lvbiI6MSwiYWNjb3VudF9pZCI6MSwiYWNjb3VudF91c2VybmFtZSI6Iis2MjgxMjEyMzQ1Njc4MCIsImFjY291bnRfdHlwZSI6IkdVREFORyIsImFjY291bnRfcm9sZSI6IkFETUlOIn0.ImoVaJHbvdFRWsEZbiTNYCo0x_CzitBV9lNfSbBhiMFXi88IhhG-KkwHemIWI6OeceuB8e6JjyupvUuONBeedbTiI1yDe0JCpXlIsbATKLMcOsSOuLKU2VWdtmqrp4JcsRdB3OJ66szdlVYUeiDzCWfyQVhEBNIoF4ALPTTCqXgkGk6e6r6A368c0s83zoHo_jNgUklXP7swoo5z4QbOKUPywIr0nH5VE_IXd0mBt2OYpfeX6SOwYd3kmRLrmeG_JwHuipyISqSVI6oP05k7qmSTd3zuuGQrSRJoAIJ_BvRomJ6Lv_3AAHTdAotnIHnksl29Spf7etM7w7RngTB1PQ",
-      },
-    };
+    let self = this;
+    let buttonName = event.target.name;
 
-    let url = lconfig.API_BASE_URL + "/v1/property";
-    axios
-      .post(url, data, config)
+    PostProperty(data)
       .then(function (response) {
         console.log("response : " + JSON.stringify(response.data));
+        console.log(buttonName);
+        if (buttonName == "saveRedirect") {
+          self.onClearChange();
+          self.props.history.push("/gudang");
+        } else {
+          self.onClearChange();
+        }
       })
       .catch(function (error) {
         console.log(JSON.stringify(error.response.data));
@@ -362,45 +580,57 @@ export class AddPropertyPage extends Component {
   };
 
   renderPictureUploaded = () => {
-      return (
-          <Image />
-      )
-  }
+    return <Image />;
+  };
 
   render() {
+    console.log(this.state.form.layananRuangan);
     return (
       <div className="page">
         <Container>
-            <BreadCrumps style={{marginLeft: "3rem", marginBottom: "3rem"}} breadcrumbs={this.state.breadcrumps} />
+          <BreadCrumps
+            style={{ marginLeft: "3rem", marginBottom: "3rem" }}
+            breadcrumbs={this.state.breadcrumps}
+          />
           <Form>
-              <Col>
+            <Col>
               <Row className="page-title">
-              <h1>Tambah Gudang</h1>
-            </Row>
-            <Row className="form-box" style={{paddingTop: "1rem", paddingBottom: "0rem"}}>
-              <p>
-                Sebelum menambahkan gudang, pastikan gudang tersebut sudah sesuai
-                dengan syarat ketentuan. Semua gudang yang melanggar syarat dan
-                ketentuan akan di non-aktifkan oleh tim kami.
-              </p>
-            </Row>
-                <Row className="form-box">
-                    <Col>
-                    <Row className="form-row form-title">
+                <h1>Tambah Gudang</h1>
+              </Row>
+              <Row
+                className="form-box"
+                style={{ paddingTop: "1rem", paddingBottom: "0rem" }}
+              >
+                <p>
+                  Sebelum menambahkan gudang, pastikan gudang tersebut sudah
+                  sesuai dengan syarat ketentuan. Semua gudang yang melanggar
+                  syarat dan ketentuan akan di non-aktifkan oleh tim kami.
+                </p>
+              </Row>
+              <Row className="form-box">
+                <Col>
+                  <Row className="form-row form-title">
                     <h1 className="font-weight-200">Informasi Gudang</h1>
                   </Row>
-                  <Row className="form-row" style={{marginBottom: "2rem"}}>
-                    {
-                        this.state.pictureUploaded.map((source, index) => (
-                            <Image key={index} src={source} className="picture-thumbnail" rounded />
-                        ))
-                    }
+                  <Row className="form-row" style={{ marginBottom: "2rem" }}>
+                    {this.state.pictureUploaded.map((source, index) => (
+                      <Image
+                        key={index}
+                        src={source}
+                        className="picture-thumbnail"
+                        rounded
+                      />
+                    ))}
                     <Button className="upload-picture">
-                        + Pilih Foto Gudang
+                      + Pilih Foto Gudang
                     </Button>
                   </Row>
                   <Row className="form-row">
-                    <Form.Group as={Row} controlId="formNamaGudang" className="width100" >
+                    <Form.Group
+                      as={Row}
+                      controlId="formNamaGudang"
+                      className="width100"
+                    >
                       <Form.Label column md="3">
                         Nama Gudang
                       </Form.Label>
@@ -408,24 +638,35 @@ export class AddPropertyPage extends Component {
                         <Form.Control
                           onChange={this.onChangeHandler}
                           name="namaGudang"
+                          value={this.state.form.namaGudang}
                         />
                       </Col>
                     </Form.Group>
                   </Row>
                   <Row className="form-row">
-                    <Form.Group as={Row} controlId="formNomorTelepon" className="width100" >
+                    <Form.Group
+                      as={Row}
+                      controlId="formNomorTelepon"
+                      className="width100"
+                    >
                       <Form.Label column md="3">
                         Nomor Telepon
                       </Form.Label>
-                      <Col md={9}> <Form.Control onChange={this.onChangeHandler} name="nomorTelepon" />
+                      <Col md={9}>
+                        {" "}
+                        <Form.Control
+                          onChange={this.onChangeHandler}
+                          name="nomorTelepon"
+                          value={this.state.form.nomorTelepon}
+                        />
                       </Col>
                     </Form.Group>
                   </Row>
-                    </Col>
-                </Row>
-                <Row className="form-box">
-                    <Col>
-                    <Row className="form-row">
+                </Col>
+              </Row>
+              <Row className="form-box">
+                <Col>
+                  <Row className="form-row">
                     <h1 className="font-weight-200">Informasi Lokasi</h1>
                   </Row>
                   <Row className="form-row">
@@ -441,6 +682,7 @@ export class AddPropertyPage extends Component {
                         <Form.Control
                           onChange={this.onChangeHandler}
                           name="alamatGudang"
+                          value={this.state.form.alamatGudang}
                         />
                       </Col>
                     </Form.Group>
@@ -458,6 +700,7 @@ export class AddPropertyPage extends Component {
                         <Form.Control
                           onChange={this.onChangeHandler}
                           name="provinsi"
+                          value={this.state.form.provinsi}
                         />
                       </Col>
                     </Form.Group>
@@ -475,6 +718,7 @@ export class AddPropertyPage extends Component {
                         <Form.Control
                           onChange={this.onChangeHandler}
                           name="kota"
+                          value={this.state.form.kota}
                         />
                       </Col>
                     </Form.Group>
@@ -492,6 +736,7 @@ export class AddPropertyPage extends Component {
                         <Form.Control
                           onChange={this.onChangeHandler}
                           name="kecamatan"
+                          value={this.state.form.kecamatan}
                         />
                       </Col>
                     </Form.Group>
@@ -509,13 +754,12 @@ export class AddPropertyPage extends Component {
                         <Form.Control
                           onChange={this.onChangeHandler}
                           name="kelurahan"
+                          value={this.state.form.kelurahan}
                         />
                       </Col>
                     </Form.Group>
                   </Row>
-                  <Row
-                    className="form-row"
-                  >
+                  <Row className="form-row">
                     <Form.Group
                       as={Row}
                       controlId="formKodePos"
@@ -528,16 +772,17 @@ export class AddPropertyPage extends Component {
                         <Form.Control
                           onChange={this.onChangeHandler}
                           name="kodePos"
+                          value={this.state.form.kodePos}
                         />
                       </Col>
                     </Form.Group>
                   </Row>
-                    </Col>
-                </Row>
-                 
-                <Row className="form-box">
-                    <Col>
-                    <Row className="form-row">
+                </Col>
+              </Row>
+
+              <Row className="form-box">
+                <Col>
+                  <Row className="form-row">
                     <h1 className="font-weight-200">Layanan</h1>
                   </Row>
                   <Row className="form-row">
@@ -558,6 +803,7 @@ export class AddPropertyPage extends Component {
                           value="PENDINGIN"
                           name="layananLayananPendingin"
                           id="checkboxLayananLayananPendingin"
+                          checked={this.state.checkboxLayananLayananPendingin}
                         />
                       </Col>
                       <Col md={3}>
@@ -569,6 +815,7 @@ export class AddPropertyPage extends Component {
                           value="RAK"
                           name="layananLayananRak"
                           id="checkboxLayananLayananRak"
+                          checked={this.state.checkboxLayananLayananRak}
                         />
                       </Col>
                       <Col md={3}>
@@ -580,6 +827,7 @@ export class AddPropertyPage extends Component {
                           value="CCTV"
                           name="layananLayananCCTV"
                           id="checkboxLayananlayananCCTV"
+                          checked={this.state.checkboxLayananlayananCCTV}
                         />
                       </Col>
                     </Form.Group>
@@ -602,6 +850,7 @@ export class AddPropertyPage extends Component {
                           value="SMALL"
                           name="layananRuangan"
                           id="radioLayananRuanganSmall"
+                          checked={this.state.radioLayananRuanganSmall}
                         />
                         <Form.Text className="text-muted">
                           Ukuran: 0 M2 - 12 M2
@@ -616,6 +865,7 @@ export class AddPropertyPage extends Component {
                           value="MEDIUM"
                           name="layananRuangan"
                           id="radioLayananRuanganMedium"
+                          checked={this.state.radioLayananRuanganMedium}
                         />
                         <Form.Text className="text-muted">
                           Ukuran: 12 M2 - 60 M2
@@ -630,6 +880,7 @@ export class AddPropertyPage extends Component {
                           value="LARGE"
                           name="layananRuangan"
                           id="radioLayananRuanganLarge"
+                          checked={this.state.radioLayananRuanganLarge}
                         />
                         <Form.Text className="text-muted">
                           Ukuran: 60 M2 - 120 M2
@@ -637,9 +888,7 @@ export class AddPropertyPage extends Component {
                       </Col>
                     </Form.Group>
                   </Row>
-                  <Row
-                    className="form-row"
-                  >
+                  <Row className="form-row">
                     <Form.Group
                       as={Row}
                       controlId="formLayananPaket"
@@ -657,6 +906,7 @@ export class AddPropertyPage extends Component {
                           name="layananPaket"
                           value="BRONZE"
                           id="radioLayananPaketBronze"
+                          checked={this.state.radioLayananPaketBronze}
                         />
                         <Form.Text className="text-muted">
                           Ukuran: 0 KG - 5 KG
@@ -677,6 +927,7 @@ export class AddPropertyPage extends Component {
                           name="layananPaket"
                           value="SILVER"
                           id="radioLayananPaketSilver"
+                          checked={this.state.radioLayananPaketSilver}
                         />
                         <Form.Text className="text-muted">
                           Ukuran: 5 KG - 40 KG
@@ -697,6 +948,7 @@ export class AddPropertyPage extends Component {
                           name="layananPaket"
                           value="GOLD"
                           id="radioLayananPaketGold"
+                          checked={this.state.radioLayananPaketGold}
                         />
                         <Form.Text className="text-muted">
                           Ukuran: 40 KG - 80 KG
@@ -710,12 +962,12 @@ export class AddPropertyPage extends Component {
                       </Col>
                     </Form.Group>
                   </Row>
-                    </Col>
-                </Row>
-                 
-                <Row className="form-box">
-                    <Col>
-                    <Row className="form-row">
+                </Col>
+              </Row>
+
+              <Row className="form-box">
+                <Col>
+                  <Row className="form-row">
                     <h1 className="font-weight-200">Informasi Pengiriman</h1>
                   </Row>
                   <Row className="form-row">
@@ -736,6 +988,7 @@ export class AddPropertyPage extends Component {
                           type="radio"
                           name="pengirimanFrequency"
                           id="radioPengirimanFrequencySatu"
+                          checked={this.state.radioPengirimanFrequencySatu}
                         />
                       </Col>
                       <Col md={2}>
@@ -747,6 +1000,7 @@ export class AddPropertyPage extends Component {
                           type="radio"
                           name="pengirimanFrequency"
                           id="radioPengirimanFrequencyDua"
+                          checked={this.state.radioPengirimanFrequencyDua}
                         />
                       </Col>
                       <Col md={2}>
@@ -758,6 +1012,9 @@ export class AddPropertyPage extends Component {
                           type="radio"
                           name="pengirimanFrequency"
                           id="radioPengirimanFrequencyLebihDariDua"
+                          checked={
+                            this.state.radioPengirimanFrequencyLebihDariDua
+                          }
                         />
                       </Col>
                     </Form.Group>
@@ -780,6 +1037,7 @@ export class AddPropertyPage extends Component {
                           type="checkbox"
                           name="hariPengirimanSenin"
                           id="checkboxHariPengirimanSenin"
+                          checked={this.state.checkSenin}
                         />
                       </Col>
                       <Col md={7} style={{ display: this.state.classSenin }}>
@@ -791,12 +1049,14 @@ export class AddPropertyPage extends Component {
                             <Form.Control
                               onChange={this.onChangeHandler}
                               name="jamOperasionalSeninDari"
+                              value={this.state.form.jamOperasionalSeninDari}
                             />
                           </Col>
                           <Col md={4}>
                             <Form.Control
                               onChange={this.onChangeHandler}
                               name="jamOperasionalSeninSampai"
+                              value={this.state.form.jamOperasionalSeninSampai}
                             />
                           </Col>
                         </div>
@@ -821,6 +1081,7 @@ export class AddPropertyPage extends Component {
                           type="checkbox"
                           name="hariPengirimanSelasa"
                           id="checkboxHariPengirimanSelasa"
+                          checked={this.state.checkSelasa}
                         />
                       </Col>
                       <Col md={7} style={{ display: this.state.classSelasa }}>
@@ -832,12 +1093,14 @@ export class AddPropertyPage extends Component {
                             <Form.Control
                               onChange={this.onChangeHandler}
                               name="jamOperasionalSelasaDari"
+                              value={this.state.form.jamOperasionalSelasaDari}
                             />
                           </Col>
                           <Col md={4}>
                             <Form.Control
                               onChange={this.onChangeHandler}
                               name="jamOperasionalSelasaSampai"
+                              value={this.state.form.jamOperasionalSelasaSampai}
                             />
                           </Col>
                         </div>
@@ -860,6 +1123,7 @@ export class AddPropertyPage extends Component {
                           type="checkbox"
                           name="hariPengirimanRabu"
                           id="checkboxHariPengirimanRabu"
+                          checked={this.state.checkRabu}
                         />
                       </Col>
                       <Col md={7} style={{ display: this.state.classRabu }}>
@@ -871,12 +1135,14 @@ export class AddPropertyPage extends Component {
                             <Form.Control
                               onChange={this.onChangeHandler}
                               name="jamOperasionalRabuDari"
+                              value={this.state.form.jamOperasionalRabuDari}
                             />
                           </Col>
                           <Col md={4}>
                             <Form.Control
                               onChange={this.onChangeHandler}
                               name="jamOperasionalRabuSampai"
+                              value={this.state.form.jamOperasionalRabuSampai}
                             />
                           </Col>
                         </div>
@@ -899,6 +1165,7 @@ export class AddPropertyPage extends Component {
                           type="checkbox"
                           name="hariPengirimanKamis"
                           id="checkboxHariPengirimanKamis"
+                          checked={this.state.checkKamis}
                         />
                       </Col>
                       <Col md={7} style={{ display: this.state.classKamis }}>
@@ -910,12 +1177,14 @@ export class AddPropertyPage extends Component {
                             <Form.Control
                               onChange={this.onChangeHandler}
                               name="jamOperasionalKamisDari"
+                              value={this.state.form.jamOperasionalKamisDari}
                             />
                           </Col>
                           <Col md={4}>
                             <Form.Control
                               onChange={this.onChangeHandler}
                               name="jamOperasionalKamisSampai"
+                              value={this.state.form.jamOperasionalKamisSampai}
                             />
                           </Col>
                         </div>
@@ -938,6 +1207,7 @@ export class AddPropertyPage extends Component {
                           type="checkbox"
                           name="hariPengirimanJumat"
                           id="checkboxHariPengirimanJumat"
+                          checked={this.state.checkJumat}
                         />
                       </Col>
                       <Col md={7} style={{ display: this.state.classJumat }}>
@@ -949,12 +1219,14 @@ export class AddPropertyPage extends Component {
                             <Form.Control
                               onChange={this.onChangeHandler}
                               name="jamOperasionalJumatDari"
+                              value={this.state.form.jamOperasionalJumatDari}
                             />
                           </Col>
                           <Col md={4}>
                             <Form.Control
                               onChange={this.onChangeHandler}
                               name="jamOperasionalJumatSampai"
+                              value={this.state.form.jamOperasionalJumatSampai}
                             />
                           </Col>
                         </div>
@@ -977,6 +1249,7 @@ export class AddPropertyPage extends Component {
                           type="checkbox"
                           name="hariPengirimanSabtu"
                           id="checkboxHariPengirimanSabtu"
+                          checked={this.state.checkSabtu}
                         />
                       </Col>
                       <Col md={7} style={{ display: this.state.classSabtu }}>
@@ -988,12 +1261,14 @@ export class AddPropertyPage extends Component {
                             <Form.Control
                               onChange={this.onChangeHandler}
                               name="jamOperasionalSabtuDari"
+                              value={this.state.form.jamOperasionalSabtuDari}
                             />
                           </Col>
                           <Col md={4}>
                             <Form.Control
                               onChange={this.onChangeHandler}
                               name="jamOperasionalSabtuSampai"
+                              value={this.state.form.jamOperasionalSabtuSampai}
                             />
                           </Col>
                         </div>
@@ -1016,6 +1291,7 @@ export class AddPropertyPage extends Component {
                           type="checkbox"
                           name="hariPengirimanMinggu"
                           id="checkboxHariPengirimanMinggu"
+                          checked={this.state.checkMinggu}
                         />
                       </Col>
                       <Col md={7} style={{ display: this.state.classMinggu }}>
@@ -1027,12 +1303,14 @@ export class AddPropertyPage extends Component {
                             <Form.Control
                               onChange={this.onChangeHandler}
                               name="jamOperasionalMingguDari"
+                              value={this.state.form.jamOperasionalMingguDari}
                             />
                           </Col>
                           <Col md={4}>
                             <Form.Control
                               onChange={this.onChangeHandler}
                               name="jamOperasionalMingguSampai"
+                              value={this.state.form.jamOperasionalMingguSampai}
                             />
                           </Col>
                         </div>
@@ -1057,6 +1335,7 @@ export class AddPropertyPage extends Component {
                           value="INSTANT"
                           name="pengirimanLogisticInstant"
                           id="checkboxPengirimanLogisticInstant"
+                          checked={this.state.checkboxPengirimanLogisticInstant}
                         />
                       </Col>
                       <Col md={3}>
@@ -1068,6 +1347,7 @@ export class AddPropertyPage extends Component {
                           value="SAMEDAY"
                           name="pengirimanLogisticSameday"
                           id="checkboxPengirimanLogisticSameDay"
+                          checked={this.state.checkboxPengirimanLogisticSameDay}
                         />
                       </Col>
                     </Form.Group>
@@ -1089,6 +1369,7 @@ export class AddPropertyPage extends Component {
                           type="checkbox"
                           name="pengirimanCOD"
                           id="checkboxPengirimanCOD"
+                          checked={this.state.checkboxPengirimanCOD}
                         />
                       </Col>
                     </Form.Group>
@@ -1110,12 +1391,17 @@ export class AddPropertyPage extends Component {
                           type="checkbox"
                           name="pengirimanDropship"
                           id="checkboxPengirimanDropship"
+                          checked={this.state.checkboxPengirimanDropship}
                         />
                       </Col>
                     </Form.Group>
                   </Row>
-                  <Row className="form-row" >
-                    <Form.Group as={Row} controlId="formPengirimanRetur" className="width100" >
+                  <Row className="form-row">
+                    <Form.Group
+                      as={Row}
+                      controlId="formPengirimanRetur"
+                      className="width100"
+                    >
                       <Form.Label column md="3">
                         Retur?
                       </Form.Label>
@@ -1127,20 +1413,40 @@ export class AddPropertyPage extends Component {
                           type="checkbox"
                           name="pengirimanRetur"
                           id="checkboxPengirimanRetur"
+                          checked={this.state.checkboxPengirimanRetur}
                         />
                       </Col>
                     </Form.Group>
                   </Row>
-                    </Col>
-                </Row>
+                </Col>
+              </Row>
 
-                <Row className="justify-content-end" style={{marginRight: "1.5rem"}}>
-              <Button className="button-white"> Batal </Button>
-              <Button className="button-white"> Simpan & Tambah Baru </Button>
-              <Button onClick={this.onSimpanHandler} className="button-green" > Simpan </Button>
-            </Row>
+              <Row
+                className="justify-content-end"
+                style={{ marginRight: "1.5rem" }}
+              >
+                <Button onClick={this.onClearChange} className="button-white">
+                  {" "}
+                  Batal{" "}
+                </Button>
+                <Button
+                  name="save"
+                  onClick={this.onSimpanHandler}
+                  className="button-white"
+                >
+                  {" "}
+                  Simpan & Tambah Baru{" "}
+                </Button>
+                <Button
+                  name="saveRedirect"
+                  onClick={this.onSimpanHandler}
+                  className="button-green"
+                >
+                  {" "}
+                  Simpan{" "}
+                </Button>
+              </Row>
             </Col>
-            
           </Form>
         </Container>
       </div>

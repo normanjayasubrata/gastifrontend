@@ -35,7 +35,7 @@ export class NavBar extends Component {
     event.preventDefault();
 
     removeToken();
-    window.location.reload(false);
+    // window.location.reload(false);
   }
 
   render() {
@@ -68,9 +68,11 @@ export class NavBar extends Component {
     const navbarLogin = (
       <Nav className="justify-content-end">
         <Nav.Item>
-          <Button variant="danger" onClick={this.logoutHandler}>
-            Logout
-          </Button>
+          <Nav.Link href="/">
+          <Button variant="danger" onClick={() => removeToken()}>
+          Logout
+        </Button>
+          </Nav.Link>
         </Nav.Item>
       </Nav >
     );

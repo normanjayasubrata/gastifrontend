@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from 'react-redux'
 import { OffCanvas, OffCanvasMenu, OffCanvasBody } from "react-offcanvas";
+import { hasToken, decodeToken } from "./utils/token";
 
 import NavBar from "./components/NavBar";
 import SideBar from './components/SideBar'
@@ -27,15 +28,15 @@ class Routes extends Component {
     this.setState({ isMenuOpened: !this.state.isMenuOpened });
   }
 
-
   render() {
+    console.log(this.props.isAuthPage)
+    console.log("norman", decodeToken())
     return (
       <div style={{ height: "100%" }}>
         <Router basename={process.env.PUBLIC_URL}>
-        {!this.props.isAuthPage ? <NavBar /> : null}
-
+          <NavBar /> 
           <div style={{ height: "100%" }}>
-          {this.state.isMenuOpened ? null : <SideBar handleClick={this.handleClick} />}
+          {(!this.state.isMenuOpened && hasToken()) ? <SideBar handleClick={this.handleClick} /> : null}
 
             <OffCanvas width={300} transitionDuration={300} isMenuOpened={this.state.isMenuOpened} position={"left"} >
             <OffCanvasBody>

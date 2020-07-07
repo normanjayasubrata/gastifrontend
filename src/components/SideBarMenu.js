@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import lconfig from '../config'
 
 class SideBarMenu extends Component {
     render() {
@@ -28,11 +28,15 @@ class SideBarMenu extends Component {
                   <div className="sidebar-box"><p>Transaksi</p></div>
                </Row>
                <Row className="justify-content-start">
-                  <div onClick={() => console.log("coba")} className="sidebar-box active-box"><p>WMS</p></div>
+                  <div className="sidebar-box active-box"><p>WMS</p></div>
                </Row>
 
                <Row className="justify-content-start">
-                  <div className="sidebar-box submenu"><p>Daftar Gudang</p></div>
+                  <div onClick={() => window.location.replace(lconfig.BASE_URL + "/gudang")} className="sidebar-box submenu"><p>Daftar Gudang</p></div>
+               </Row>
+
+               <Row className="justify-content-start">
+                  <div onClick={() => window.location.replace(lconfig.BASE_URL + "/gudang/tambah")} className="sidebar-box submenu"><p>Tambah Gudang</p></div>
                </Row>
 
                <Row className="justify-content-start">
