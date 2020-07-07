@@ -11,7 +11,9 @@
     "bootstrap": "^4.4.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.0",
+    "react-bootstrap-table": "^4.3.1",
     "react-dom": "^16.13.1",
+    "react-offcanvas": "^0.4.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
@@ -42,6 +44,7 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^2.2.0"
+    "gh-pages": "^2.2.0",
+    "jsonwebtoken": "^8.5.1"
   }
 }

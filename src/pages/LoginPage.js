@@ -1,31 +1,25 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from "react-router-dom";
-
+import { Link, Redirect } from "react-router-dom";
 import { Form, Button, Container, Col, Row, Image } from "react-bootstrap";
-import { enter_auth_page, exit_auth_page } from "../store/action";
-
-import { gastiLogo } from "../assets/images";
 import axios from "axios"
-import lconfig from "../config"
 
+import lconfig from "../config"
+import { enter_auth_page, exit_auth_page } from "../store/action";
+import { setToken, hasToken } from "../store/localstorage/token";
+import { gastiLogo } from "../assets/images";
+
+import { AccountLogin } from "../api/account";
 class LoginPage extends Component {
     state = {
         form: {
             phoneNumber: "",
             password: "",
+            accountType: "GUDANG"
         },
         isAgree: false,
         isAllValidated: false,
         token: "",
-    }
-
-    componentDidMount() {
-        this.props.enterAuthPage();
-    }
-
-    componentWillUnmount() {
-        this.props.exitAuthPage();
     }
 
     onChangeHandler = event => {
@@ -42,7 +36,6 @@ class LoginPage extends Component {
                     }
                 }
             }
-
         })
         setTimeout(() => {
             this.validateAll();
@@ -63,6 +56,7 @@ class LoginPage extends Component {
 
     onSubmitHandler = (event) => {
         event.preventDefault();
+
         let phone = this.state.form.phoneNumber
         if (phone.substring(0, 2) === '08') {
             phone = phone.replace('08', '+628')
@@ -75,8 +69,7 @@ class LoginPage extends Component {
         }
 
         let data = JSON.stringify({
-            account_type: 'GUDANG',
-            account_role: 'ADMIN',
+            account_type: this.state.form.accountType,
             auth: {
                 username: phone,
                 password: this.state.form.password
@@ -85,70 +78,90 @@ class LoginPage extends Component {
 
         let url = lconfig.API_BASE_URL + '/v1/auth/login'
         let self = this
-        axios.post(url, data, config)
+        // axios.post(url, data, config)
+        AccountLogin(data)
             .then(function (response) {
-                console.log("response : " + JSON.stringify(response.data));
+                console.log(response)
                 self.setState({ token: JSON.stringify(response.data.value) })
+                setToken(response.data.value)
+                self.props.history.push("/gudang")
+
+                window.location.reload(false);
             })
             .catch(function (error) {
-                console.log(JSON.stringify(error.response.data))
+                if (error.response != undefined) {
+                    alert(error.response.data.error)
+                } else {
+                    alert("Login (" + error + ")")
+                }
             });
     }
 
     render() {
-        // console.log(this.props)
         const { isNotMobile } = this.props
         const paddingLefRight = isNotMobile ? "20rem" : "1rem"
         const inactiveButton = (
             <Button variant="primary" type="submit" style={{ width: "100%", backgroundColor: "#00000029", color: "#909090", border: "none", height: "3rem" }} disabled>
                 Masuk
-          </Button>
+            </Button>
         )
         const activeButton = (
             <Button variant="primary" type="submit" style={{ width: "100%", backgroundColor: "#DF1C78", border: "none", height: "3rem" }} >
                 Masuk
-          </Button>
+            </Button>
         )
-        // console.log(this.state)
-        return (
-            <div style={{ paddingTop: isNotMobile ? "12rem" : "6rem" }}>
-                <Container>
-                    <Col>
-                        <Row className="justify-content-center" style={{ marginBottom: "1rem" }}><Image src={gastiLogo} /></Row>
-                        <Row className="justify-content-center"><h1 style={{ fontWeight: "300" }}>Selamat Datang</h1></Row>
-                        <Row className="justify-content-center" style={{ borderBottom: "solid #00000029 1px", marginRight: paddingLefRight, marginLeft: paddingLefRight, marginBottom: "2rem" }}>
-                            <span><p>Belum punya akun?</p></span>
-                            <span><Link to="/register"><p style={{ fontWeight: "bold", color: "#DF1C78" }}>Daftar</p></Link></span>
-                        </Row>
-                        <Row className="justify-content-center">
-                            <Form style={{ width: "27rem" }} onSubmit={this.onSubmitHandler}>
-                                <Form.Group>
-                                    <Form.Label>Masukan No. HP</Form.Label>
-                                    <Form.Control name="phoneNumber" onChange={this.onChangeHandler} style={isNaN(this.state.form.phoneNumber) ? { border: "solid red 2px" } : null} value={this.state.form.phoneNumber} />
-                                    <Form.Text className={!isNaN(this.state.form.phoneNumber) ? "text-muted" : null} style={isNaN(this.state.form.phoneNumber) ? { color: "red" } : null}>
-                                        {!isNaN(this.state.form.phoneNumber) ? "contoh: 081234567890" : "fill with number"}
-                                    </Form.Text>
-                                </Form.Group>
 
-                                <Form.Group>
-                                    <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" name="password" onChange={this.onChangeHandler} value={this.state.form.password} />
-                                </Form.Group>
-                                <Form.Group>
-                                    <Row className="justify-content-center">
-                                        <Form.Check type="checkbox" name="checkbox" onChange={this.onChangeHandler} />
-                                        <p> saya setuju dengan <Link to="/termcondition">syarat & ketentuan</Link></p>
-                                    </Row>
-                                </Form.Group>
-                                {
-                                    this.state.isAllValidated ? activeButton : inactiveButton
-                                }
-                            </Form>
-                        </Row>
-                    </Col>
-                </Container>
-            </div>
-        )
+        if (hasToken()) {
+            return <Redirect to={lconfig.REDIRECT_URL} />
+        } else {
+            this.props.enterAuthPage();
+
+            return (
+                <div style={{ paddingTop: isNotMobile ? "12rem" : "6rem" }}>
+                    <Container>
+                        <Col>
+                            <Row className="justify-content-center" style={{ marginBottom: "1rem" }}><Image src={gastiLogo} /></Row>
+                            <Row className="justify-content-center"><h1 style={{ fontWeight: "300" }}>Selamat Datang</h1></Row>
+                            <Row className="justify-content-center" style={{ borderBottom: "solid #00000029 1px", marginRight: paddingLefRight, marginLeft: paddingLefRight, marginBottom: "2rem" }}>
+                                <span><p>Belum punya akun?</p></span>
+                                <span><Link to="/register"><p style={{ fontWeight: "bold", color: "#DF1C78" }}>Daftar</p></Link></span>
+                            </Row>
+                            <Row className="justify-content-center">
+                                <Form style={{ width: "27rem" }} onSubmit={this.onSubmitHandler}>
+                                    <Form.Group>
+                                        <Form.Label>Masukan No. HP</Form.Label>
+                                        <Form.Control name="phoneNumber" onChange={this.onChangeHandler} style={isNaN(this.state.form.phoneNumber) ? { border: "solid red 2px" } : null} value={this.state.form.phoneNumber} />
+                                        <Form.Text className={!isNaN(this.state.form.phoneNumber) ? "text-muted" : null} style={isNaN(this.state.form.phoneNumber) ? { color: "red" } : null}>
+                                            {!isNaN(this.state.form.phoneNumber) ? "contoh: 081234567890" : "fill with number"}
+                                        </Form.Text>
+                                    </Form.Group>
+                                    <Form.Group>
+                                        <Form.Label>Password</Form.Label>
+                                        <Form.Control type="password" name="password" onChange={this.onChangeHandler} value={this.state.form.password} />
+                                    </Form.Group>
+                                    <Form.Group>
+                                        <Form.Label>Login Sebagai</Form.Label>
+                                        <Form.Control as="select" onChange={this.onChangeHandler} name="accountType" >
+                                            <option value="GUDANG">Pemilik Gudang</option>
+                                            <option value="USAHA">Pemilik Usaha</option>
+                                        </Form.Control>
+                                    </Form.Group>
+                                    <Form.Group>
+                                        <Row className="justify-content-center">
+                                            <Form.Check type="checkbox" name="checkbox" onChange={this.onChangeHandler} />
+                                            <p> saya setuju dengan <Link to="/termcondition">syarat & ketentuan</Link></p>
+                                        </Row>
+                                    </Form.Group>
+                                    {
+                                        this.state.isAllValidated ? activeButton : inactiveButton
+                                    }
+                                </Form>
+                            </Row>
+                        </Col>
+                    </Container>
+                </div>
+            )
+        }
     }
 }
 
@@ -158,8 +171,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    enterAuthPage: () => dispatch(enter_auth_page()),
-    exitAuthPage: () => dispatch(exit_auth_page())
+    enterAuthPage: () => dispatch(enter_auth_page())
 })
 
 

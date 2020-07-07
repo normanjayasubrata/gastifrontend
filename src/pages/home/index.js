@@ -1,44 +1,45 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ReactSnapScroll from "react-snap-scroll";
 
 import { account_type } from "../../store/action";
+import { hasToken } from "../../store/localstorage/token";
 
 import "./index.css";
-import Search from "./Search";
-import About from "./About";
-import MediaPage from "./MediaPage";
-import Services from "./Services";
-import Contact from "./Contact";
-import TenantPage from './TenantPage';
+import OwnerPage from "./OwnerPage";
+import TenantPage from "./TenantPage";
 
 export class Home extends Component {
-  isLogin(pageSize, accountType, accountTypeID) {
-    return { accountTypeID } === 1 ? <Search windowSize={pageSize} accountType={accountType} /> : <TenantPage windowSize={this.props.pageSize} accountType={accountType} />;
-  }
+  // isLogin(pageSize, accountType) {
+  //   return hasToken() ? <TenantPage windowSize={pageSize} accountType={accountType} /> : ;
+  // }
 
   render() {
     const { accountType } = this.props;
+    console.log(this.props.accountType.id);
 
-    return (
-      <div style={{ height: "100%" }}>
-        {this.isLogin(this.props.pageSize, accountType, accountType.id)}
-        <About windowSize={this.props.pageSize} accountType={accountType} />
-        <MediaPage windowSize={this.props.pageSize} accountType={accountType} />
-        <Services windowSize={this.props.pageSize} accountType={accountType} setAccountType={this.props.setAccountType} />
-        <Contact windowSize={this.props.pageSize} accountType={accountType} />
-      </div>
-    );
+    switch (this.props.accountType.id) {
+      case 1:
+        return <OwnerPage />
+        break;
+
+      case 2:
+        return <TenantPage />
+        break;
+      default:
+        return null
+        break;
+    }
+    return <div style={{ height: "100%" }}>{}</div>;
   }
 }
 
 const mapStateToProps = (state) => ({
   pageSize: state.windowSizeReducer,
-  accountType: state.accountReducer.accountType
+  accountType: state.accountReducer.accountType,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setAccountType: (data) => dispatch(account_type(data))
-})
+  setAccountType: (data) => dispatch(account_type(data)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -1,0 +1,290 @@
+.page {
+    background-color: #f8f9fa;
+    padding-top: 3rem;
+    height: 100%;
+    padding-bottom: 12rem;
+  }
+  
+.page-title {
+    font-size: 24px;
+    margin-left: 2rem;
+}  
+
+
+.page-row {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.button-disable {
+    background-color: "#00000029";
+    color: "#909090";
+    border: "none";
+    height: 3rem; 
+    margin-left: 1rem;
+}
+
+.button-active {
+    background-color: "#DF1C78";
+    border: "none";
+    height: 3rem;
+    margin-left: 1rem;
+}
+
+.font-weight-300 {
+    font-weight: 300;
+}
+
+.font-weight-200 {
+    font-weight: 200;
+}
+
+.width100 {
+    width: 100%;
+}
+
+.form-row {
+    margin-bottom: 10px;
+}
+
+.form-row h1 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }  
+
+.form-row-right {
+    margin-bottom: 10px;
+    float: right;
+}
+
+.form-box {
+    border: solid#E4E4E4 1px;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: 2rem;
+  }  
+
+.border-black {
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.table-index {
+    width: 15px;
+}
+
+.margin0 {
+    margin: 0 !important;
+}
+
+th {
+    font-weight: inherit;
+}
+
+.text-muted {
+    color: #dbdbdb !important;
+}
+
+.table-link {
+    color: #007bff !important;
+}
+
+.react-bs-table {
+    border: 1px solid #00c9a7;
+    border-radius: 5px;
+}
+
+.table-header {
+    background: #F4F4F4;
+}
+
+.table-box {
+    border: #E4E4E4 solid 1px;
+    background-color: white;
+    border-radius: 0.5rem;
+}
+
+.table-filter {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.table-filter-button p {
+    color: #909090;
+    font: 14px;
+    margin-top: 0.3rem;
+    margin-right: 0.5rem;
+}
+
+.button-green {
+    border: #00c9a7 solid 1px;
+    background-color: #00c9a7;
+    color: white;
+    width: 13.25rem;
+    height: 3.125rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  
+  .button-white {
+    border: #e4e4e4 solid 1px;
+    background-color: white;
+    color: #909090;
+    width: 13.25rem;
+    height: 3.125rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .button-filter-white {
+    padding: 0;
+    border: #e4e4e4 solid 1px;
+    background-color: white;
+    color: black;
+    width: 10.875rem;
+    height: 2rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  
+  .picture-thumbnail {
+      width: 9.375rem;
+      height: 9.375rem;
+      margin-left: 1rem;
+      margin-right: 1rem;
+  }
+  
+  .upload-picture {
+      width: 9.375rem;
+      height: 9.375rem;
+      border: solid #E4E4E4 1px;
+      border-radius: 0.5rem;
+      background-color: white;
+      font-size: 16px;
+      color: black;
+      margin-left: 1rem;
+      margin-right: 1rem;
+  }
+
+  .location {
+    background-image: url("../assets/images/ico_pin_sm.png");
+    background-repeat: no-repeat;
+    background-position-y: .1rem;
+    padding-left: 1.5rem;
+    color: #909090;
+    font-size: 14px;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    min-height: 100vh !important;
+    z-index: 100;
+    padding: 48px 0 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    width: 7rem;
+}
+.sidebar-wrapper{
+    min-height: 100vh !important;
+    width: 100vw;
+    margin-left: -1rem;
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
+}
+.sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+}
+
+.page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+}
+
+  .sidebar {
+    margin-top: 5rem;
+    border: solid #E4E4E4 1px;
+    height: 100%;
+    position: fixed;
+    width: 4.563rem;
+    background-color: white;
+    padding: 0rem;
+  }
+
+ .open {
+      width: 15.375rem;
+      padding-left: 3rem;
+      font-size: 14px;
+  }
+
+  .sidebar-button {
+    background-color: white;
+    border: none;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+ 
+
+  .sidebar-button div {
+    width: 30px;
+    height: 4px;
+    background-color: #B4B4B4;
+    margin: 6px 0;
+  }
+
+  .sidebar-button-close {
+    color: #B4B4B4;
+    border: none;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .sidebar-profile {
+      background-color:#E4E4E4;
+      height: 5.5rem;
+      width: 100%;
+      padding-top: 30%;
+      padding-left: 20%;
+  }
+
+  .sidebar-profile div {
+      background-color: white;
+      width: 2.625rem;
+      height: 2.625rem;
+      border-radius: 50%;
+  }
+
+  .sidebar-box {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: #B4B4B4;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+  }
+
+  .sidebar-box p {
+      margin-left: 3rem;
+      margin-top: 0.1rem;
+      white-space: nowrap;
+  }
+
+  .submenu {
+      background-color: white;
+  }
+
+.active-box {
+    background-color: #DF1C78;
+    color: #DF1C78;
+    font-weight: bolder;
+  }
