@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/gastifrontend/static/css/main.4260d0bb.chunk.css",
-    "main.js": "/gastifrontend/static/js/main.3b19256f.chunk.js",
-    "main.js.map": "/gastifrontend/static/js/main.3b19256f.chunk.js.map",
+    "main.css": "/gastifrontend/static/css/main.d391cdcd.chunk.css",
+    "main.js": "/gastifrontend/static/js/main.a8e674b6.chunk.js",
+    "main.js.map": "/gastifrontend/static/js/main.a8e674b6.chunk.js.map",
     "runtime-main.js": "/gastifrontend/static/js/runtime-main.590f35cc.js",
     "runtime-main.js.map": "/gastifrontend/static/js/runtime-main.590f35cc.js.map",
-    "static/css/2.69121389.chunk.css": "/gastifrontend/static/css/2.69121389.chunk.css",
-    "static/js/2.f0901db6.chunk.js": "/gastifrontend/static/js/2.f0901db6.chunk.js",
-    "static/js/2.f0901db6.chunk.js.map": "/gastifrontend/static/js/2.f0901db6.chunk.js.map",
+    "static/css/2.59856660.chunk.css": "/gastifrontend/static/css/2.59856660.chunk.css",
+    "static/js/2.3e5e080e.chunk.js": "/gastifrontend/static/js/2.3e5e080e.chunk.js",
+    "static/js/2.3e5e080e.chunk.js.map": "/gastifrontend/static/js/2.3e5e080e.chunk.js.map",
     "index.html": "/gastifrontend/index.html",
-    "precache-manifest.be043ebc3910340eddd38b41a6ef092c.js": "/gastifrontend/precache-manifest.be043ebc3910340eddd38b41a6ef092c.js",
+    "precache-manifest.445b5ce1120fd587be3b73cde732340a.js": "/gastifrontend/precache-manifest.445b5ce1120fd587be3b73cde732340a.js",
     "service-worker.js": "/gastifrontend/service-worker.js",
-    "static/css/2.69121389.chunk.css.map": "/gastifrontend/static/css/2.69121389.chunk.css.map",
-    "static/css/main.4260d0bb.chunk.css.map": "/gastifrontend/static/css/main.4260d0bb.chunk.css.map",
-    "static/js/2.f0901db6.chunk.js.LICENSE.txt": "/gastifrontend/static/js/2.f0901db6.chunk.js.LICENSE.txt",
+    "static/css/2.59856660.chunk.css.map": "/gastifrontend/static/css/2.59856660.chunk.css.map",
+    "static/css/main.d391cdcd.chunk.css.map": "/gastifrontend/static/css/main.d391cdcd.chunk.css.map",
+    "static/js/2.3e5e080e.chunk.js.LICENSE.txt": "/gastifrontend/static/js/2.3e5e080e.chunk.js.LICENSE.txt",
     "static/media/bg-03.png": "/gastifrontend/static/media/bg-03.279013c3.png",
     "static/media/img_peta.png": "/gastifrontend/static/media/img_peta.d8535bfa.png",
     "static/media/segitiga-02.png": "/gastifrontend/static/media/segitiga-02.8d38768e.png",
@@ -22,9 +22,9 @@
   },
   "entrypoints": [
     "static/js/runtime-main.590f35cc.js",
-    "static/css/2.69121389.chunk.css",
-    "static/js/2.f0901db6.chunk.js",
-    "static/css/main.4260d0bb.chunk.css",
-    "static/js/main.3b19256f.chunk.js"
+    "static/css/2.59856660.chunk.css",
+    "static/js/2.3e5e080e.chunk.js",
+    "static/css/main.d391cdcd.chunk.css",
+    "static/js/main.a8e674b6.chunk.js"
   ]
 }
