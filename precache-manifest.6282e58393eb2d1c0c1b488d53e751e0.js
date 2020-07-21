@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b42c23aad36041a841e58c96c6ad5a40",
+    "revision": "c8000338e3fc5cc1214fff83656aa9fa",
     "url": "/gastifrontend/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/gastifrontend/static/css/2.59856660.chunk.css"
   },
   {
-    "revision": "c9c4a8253394dfdce0bf",
+    "revision": "104cc9de9dc8a9dac796",
     "url": "/gastifrontend/static/css/main.d391cdcd.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/gastifrontend/static/js/2.3e5e080e.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c9c4a8253394dfdce0bf",
-    "url": "/gastifrontend/static/js/main.a8e674b6.chunk.js"
+    "revision": "104cc9de9dc8a9dac796",
+    "url": "/gastifrontend/static/js/main.d48b2c3e.chunk.js"
   },
   {
     "revision": "638df3222ad7b0717ee0",

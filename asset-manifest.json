@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/gastifrontend/static/css/main.d391cdcd.chunk.css",
-    "main.js": "/gastifrontend/static/js/main.a8e674b6.chunk.js",
-    "main.js.map": "/gastifrontend/static/js/main.a8e674b6.chunk.js.map",
+    "main.js": "/gastifrontend/static/js/main.d48b2c3e.chunk.js",
+    "main.js.map": "/gastifrontend/static/js/main.d48b2c3e.chunk.js.map",
     "runtime-main.js": "/gastifrontend/static/js/runtime-main.590f35cc.js",
     "runtime-main.js.map": "/gastifrontend/static/js/runtime-main.590f35cc.js.map",
     "static/css/2.59856660.chunk.css": "/gastifrontend/static/css/2.59856660.chunk.css",
     "static/js/2.3e5e080e.chunk.js": "/gastifrontend/static/js/2.3e5e080e.chunk.js",
     "static/js/2.3e5e080e.chunk.js.map": "/gastifrontend/static/js/2.3e5e080e.chunk.js.map",
     "index.html": "/gastifrontend/index.html",
-    "precache-manifest.445b5ce1120fd587be3b73cde732340a.js": "/gastifrontend/precache-manifest.445b5ce1120fd587be3b73cde732340a.js",
+    "precache-manifest.6282e58393eb2d1c0c1b488d53e751e0.js": "/gastifrontend/precache-manifest.6282e58393eb2d1c0c1b488d53e751e0.js",
     "service-worker.js": "/gastifrontend/service-worker.js",
     "static/css/2.59856660.chunk.css.map": "/gastifrontend/static/css/2.59856660.chunk.css.map",
     "static/css/main.d391cdcd.chunk.css.map": "/gastifrontend/static/css/main.d391cdcd.chunk.css.map",
@@ -25,6 +25,6 @@
     "static/css/2.59856660.chunk.css",
     "static/js/2.3e5e080e.chunk.js",
     "static/css/main.d391cdcd.chunk.css",
-    "static/js/main.a8e674b6.chunk.js"
+    "static/js/main.d48b2c3e.chunk.js"
   ]
 }
