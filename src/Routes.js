@@ -19,6 +19,9 @@ import ResultPage from './pages/ResultPage'
 import ResultPageDetail from './pages/ResultPageDetail'
 import AddBrandPage from './pages/AddBrandPage'
 
+import lconfig from "./config"
+
+
 class Routes extends Component {
   state = {
     isMenuOpened: false,
@@ -33,7 +36,7 @@ class Routes extends Component {
     console.log("norman", decodeToken())
     return (
       <div style={{ height: "100%" }}>
-        <Router basename={process.env.PUBLIC_URL}>
+        <Router basename={lconfig.BASE_URL}>
           <NavBar /> 
           <div style={{ height: "100%" }}>
           {(!this.state.isMenuOpened && hasToken()) ? <SideBar handleClick={this.handleClick} /> : null}
