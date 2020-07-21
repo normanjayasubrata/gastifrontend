@@ -10,7 +10,7 @@ import SideBarMenu from './components/SideBarMenu'
 import NotFound from "./components/NotFound";
 
 import Home from './pages/home'
-import LoginPage from './pages/LoginPage'
+import LoginPage from './pages/login_page'
 import RegisterPage from './pages/RegisterPage'
 import ListPropertyPage from './pages/ListPropertyPage'
 import AddPropertyPage from './pages/AddPropertyPage'
