@@ -1,30 +1,30 @@
 {
   "files": {
-    "main.css": "/static/css/main.d391cdcd.chunk.css",
-    "main.js": "/static/js/main.b5353995.chunk.js",
-    "main.js.map": "/static/js/main.b5353995.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.6ee959ee.js",
-    "runtime-main.js.map": "/static/js/runtime-main.6ee959ee.js.map",
-    "static/css/2.59856660.chunk.css": "/static/css/2.59856660.chunk.css",
-    "static/js/2.54840b4b.chunk.js": "/static/js/2.54840b4b.chunk.js",
-    "static/js/2.54840b4b.chunk.js.map": "/static/js/2.54840b4b.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.3c0c86a002e16ffb44111f5db48b2a49.js": "/precache-manifest.3c0c86a002e16ffb44111f5db48b2a49.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.59856660.chunk.css.map": "/static/css/2.59856660.chunk.css.map",
-    "static/css/main.d391cdcd.chunk.css.map": "/static/css/main.d391cdcd.chunk.css.map",
-    "static/js/2.54840b4b.chunk.js.LICENSE.txt": "/static/js/2.54840b4b.chunk.js.LICENSE.txt",
-    "static/media/bg-03.png": "/static/media/bg-03.279013c3.png",
-    "static/media/img_peta.png": "/static/media/img_peta.d8535bfa.png",
-    "static/media/segitiga-02.png": "/static/media/segitiga-02.8d38768e.png",
-    "static/media/segitiga-03.png": "/static/media/segitiga-03.2e47d106.png",
-    "static/media/wh-example.png": "/static/media/wh-example.fbff1545.png"
+    "main.css": "/gastifrontend/static/css/main.d391cdcd.chunk.css",
+    "main.js": "/gastifrontend/static/js/main.67f1c560.chunk.js",
+    "main.js.map": "/gastifrontend/static/js/main.67f1c560.chunk.js.map",
+    "runtime-main.js": "/gastifrontend/static/js/runtime-main.590f35cc.js",
+    "runtime-main.js.map": "/gastifrontend/static/js/runtime-main.590f35cc.js.map",
+    "static/css/2.59856660.chunk.css": "/gastifrontend/static/css/2.59856660.chunk.css",
+    "static/js/2.3e5e080e.chunk.js": "/gastifrontend/static/js/2.3e5e080e.chunk.js",
+    "static/js/2.3e5e080e.chunk.js.map": "/gastifrontend/static/js/2.3e5e080e.chunk.js.map",
+    "index.html": "/gastifrontend/index.html",
+    "precache-manifest.b79ea4b86eb3548ad1cacb27832c0350.js": "/gastifrontend/precache-manifest.b79ea4b86eb3548ad1cacb27832c0350.js",
+    "service-worker.js": "/gastifrontend/service-worker.js",
+    "static/css/2.59856660.chunk.css.map": "/gastifrontend/static/css/2.59856660.chunk.css.map",
+    "static/css/main.d391cdcd.chunk.css.map": "/gastifrontend/static/css/main.d391cdcd.chunk.css.map",
+    "static/js/2.3e5e080e.chunk.js.LICENSE.txt": "/gastifrontend/static/js/2.3e5e080e.chunk.js.LICENSE.txt",
+    "static/media/bg-03.png": "/gastifrontend/static/media/bg-03.279013c3.png",
+    "static/media/img_peta.png": "/gastifrontend/static/media/img_peta.d8535bfa.png",
+    "static/media/segitiga-02.png": "/gastifrontend/static/media/segitiga-02.8d38768e.png",
+    "static/media/segitiga-03.png": "/gastifrontend/static/media/segitiga-03.2e47d106.png",
+    "static/media/wh-example.png": "/gastifrontend/static/media/wh-example.fbff1545.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.6ee959ee.js",
+    "static/js/runtime-main.590f35cc.js",
     "static/css/2.59856660.chunk.css",
-    "static/js/2.54840b4b.chunk.js",
+    "static/js/2.3e5e080e.chunk.js",
     "static/css/main.d391cdcd.chunk.css",
-    "static/js/main.b5353995.chunk.js"
+    "static/js/main.67f1c560.chunk.js"
   ]
 }
