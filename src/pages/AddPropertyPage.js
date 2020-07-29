@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Form, Button, Container, Col, Row, Image } from "react-bootstrap";
-import axios from "axios";
-import lconfig from "../config";
 import "../assets/index.css";
 import { warehousePic } from "../assets/images";
 import { PostProperty } from "../api/property";
@@ -23,7 +21,9 @@ export class AddPropertyPage extends Component {
       layananLayananRak: "",
       layananlayananCCTV: "",
       layananRuangan: "",
-      layananPaket: "",
+      layananPaketBronze: "",
+      layananPaketSilver: "",
+      layananPaketGold: "",
       pengirimanFrequency: "",
       hariPengirimanSenin: "",
       jamOperasionalSeninDari: "",
@@ -78,7 +78,9 @@ export class AddPropertyPage extends Component {
       layananLayananRak: "",
       layananlayananCCTV: "",
       layananRuangan: "",
-      layananPaket: "",
+      layananPaketBronze: "",
+      layananPaketSilver: "",
+      layananPaketGold: "",
       pengirimanFrequency: "",
       hariPengirimanSenin: "",
       jamOperasionalSeninDari: "",
@@ -122,12 +124,12 @@ export class AddPropertyPage extends Component {
     checkboxLayananLayananPendingin: false,
     checkboxLayananLayananRak: false,
     checkboxLayananlayananCCTV: false,
+    checkboxLayananPaketBronze: false,
+    checkboxLayananPaketSilver: false,
+    checkboxLayananPaketGold: false,
     radioPengirimanFrequencySatu: false,
     radioPengirimanFrequencyDua: false,
     radioPengirimanFrequencyLebihDariDua: false,
-    radioLayananPaketBronze: false,
-    radioLayananPaketSilver: false,
-    radioLayananPaketGold: false,
     radioLayananRuanganSmall: false,
     radioLayananRuanganMedium: false,
     radioLayananRuanganLarge: false,
@@ -143,7 +145,6 @@ export class AddPropertyPage extends Component {
 
   onChangeHandler = (event) => {
     const { id, value, type, name, checked } = event.target;
-    console.log(id);
     this.setState((state) => {
       if (type === "checkbox") {
         if (checked) {
@@ -273,23 +274,23 @@ export class AddPropertyPage extends Component {
           } else {
             return { radioPengirimanFrequencyLebihDariDua: false };
           }
-        case "radioLayananPaketBronze":
+        case "checkboxLayananPaketBronze":
           if (checked) {
-            return { radioLayananPaketBronze: true };
+            return { checkboxLayananPaketBronze: true };
           } else {
-            return { radioLayananPaketBronze: false };
+            return { checkboxLayananPaketBronze: false };
           }
-        case "radioLayananPaketSilver":
+        case "checkboxLayananPaketSilver":
           if (checked) {
-            return { radioLayananPaketSilver: true };
+            return { checkboxLayananPaketSilver: true };
           } else {
-            return { radioLayananPaketSilver: false };
+            return { checkboxLayananPaketSilver: false };
           }
-        case "radioLayananPaketGold":
+        case "checkboxLayananPaketGold":
           if (checked) {
-            return { radioLayananPaketGold: true };
+            return { checkboxLayananPaketGold: true };
           } else {
-            return { radioLayananPaketGold: false };
+            return { checkboxLayananPaketGold: false };
           }
         case "radioLayananRuanganSmall":
           if (checked) {
@@ -339,18 +340,17 @@ export class AddPropertyPage extends Component {
       "checkboxLayananLayananPendingin",
       "checkboxLayananLayananRak",
       "checkboxLayananlayananCCTV",
+      "checkboxLayananPaketBronze",
+      "checkboxLayananPaketSilver",
+      "checkboxLayananPaketGold",
       "radioPengirimanFrequencySatu",
       "radioPengirimanFrequencyDua",
       "radioPengirimanFrequencyLebihDariDua",
-      "radioLayananPaketBronze",
-      "radioLayananPaketSilver",
-      "radioLayananPaketGold",
       "radioLayananRuanganSmall",
       "radioLayananRuanganMedium",
       "radioLayananRuanganLarge",
     ];
     checkboxes.map((checkbox) => {
-      console.log(checkbox);
       this.setState({ [checkbox]: false });
     });
   };
@@ -367,7 +367,15 @@ export class AddPropertyPage extends Component {
     let validPengirimanFrequency =
       this.state.form.pengirimanFrequency.trim() !== "";
     let validLayananRuangan = this.state.form.layananRuangan.trim() !== "";
-    let validLayananPaket = this.state.form.layananPaket.trim() !== "";
+
+    let validLayananPaket = false;
+    if (
+      this.state.form.layananPaketBronze !== "" ||
+      this.state.form.layananPaketSilver !== "" ||
+      this.state.form.layananPaketGold !== ""
+    ) {
+      validLayananPaket = true;
+    }
 
     let validHariPengiriman = false;
     if (
@@ -414,7 +422,6 @@ export class AddPropertyPage extends Component {
 
   onSimpanHandler = (event) => {
     event.preventDefault();
-    console.log(event.target.name);
 
     if (!this.state.isAllValidated) {
       return alert("Lengkapi form pengisian");
@@ -519,6 +526,21 @@ export class AddPropertyPage extends Component {
       }
     });
 
+    // get service packages
+    let servicePackages = Object.entries(this.state.form).map(
+      ([key, value]) => {
+        if (key.includes("layananPaket")) {
+          return value;
+        }
+      }
+    );
+
+    let filteredServicePackages = servicePackages.filter(function (el) {
+      if (el !== null && el !== "") {
+        return el;
+      }
+    });
+
     // set variable cod
     let cod = false;
     if (this.state.form.pengirimanCOD !== "") {
@@ -551,7 +573,7 @@ export class AddPropertyPage extends Component {
       property_size: this.state.form.layananRuangan,
       photos: ["URL1", "URL2", "URL3", "URL4"],
       services: filteredLayanan,
-      service_package: this.state.form.layananRuangan,
+      service_packages: filteredServicePackages,
       delivery_frequency: parseInt(this.state.form.pengirimanFrequency),
       delivery_logistics: filteredDeliveryLogistics,
       property_schedules: hariPengiriman,
@@ -565,8 +587,6 @@ export class AddPropertyPage extends Component {
 
     PostProperty(data)
       .then(function (response) {
-        console.log("response : " + JSON.stringify(response.data));
-        console.log(buttonName);
         if (buttonName == "saveRedirect") {
           self.onClearChange();
           self.props.history.push("/gudang");
@@ -584,7 +604,6 @@ export class AddPropertyPage extends Component {
   };
 
   render() {
-    console.log(this.state.form.layananRuangan);
     return (
       <div className="page">
         <Container>
@@ -902,11 +921,11 @@ export class AddPropertyPage extends Component {
                           onChange={this.onChangeHandler}
                           inline
                           label="Bronze"
-                          type="radio"
-                          name="layananPaket"
+                          type="checkbox"
+                          name="layananPaketBronze"
                           value="BRONZE"
-                          id="radioLayananPaketBronze"
-                          checked={this.state.radioLayananPaketBronze}
+                          id="checkboxLayananPaketBronze"
+                          checked={this.state.checkboxLayananPaketBronze}
                         />
                         <Form.Text className="text-muted">
                           Ukuran: 0 KG - 5 KG
@@ -923,11 +942,11 @@ export class AddPropertyPage extends Component {
                           onChange={this.onChangeHandler}
                           inline
                           label="Silver"
-                          type="radio"
-                          name="layananPaket"
+                          type="checkbox"
+                          name="layananPaketSilver"
                           value="SILVER"
-                          id="radioLayananPaketSilver"
-                          checked={this.state.radioLayananPaketSilver}
+                          id="checkboxLayananPaketSilver"
+                          checked={this.state.checkboxLayananPaketSilver}
                         />
                         <Form.Text className="text-muted">
                           Ukuran: 5 KG - 40 KG
@@ -944,11 +963,11 @@ export class AddPropertyPage extends Component {
                           onChange={this.onChangeHandler}
                           inline
                           label="Gold"
-                          type="radio"
-                          name="layananPaket"
+                          type="checkbox"
+                          name="layananPaketGold"
                           value="GOLD"
-                          id="radioLayananPaketGold"
-                          checked={this.state.radioLayananPaketGold}
+                          id="checkboxLayananPaketGold"
+                          checked={this.state.checkboxLayananPaketGold}
                         />
                         <Form.Text className="text-muted">
                           Ukuran: 40 KG - 80 KG
@@ -1426,24 +1445,21 @@ export class AddPropertyPage extends Component {
                 style={{ marginRight: "1.5rem" }}
               >
                 <Button onClick={this.onClearChange} className="button-white">
-                  {" "}
-                  Batal{" "}
+                  Batal
                 </Button>
                 <Button
                   name="save"
                   onClick={this.onSimpanHandler}
                   className="button-white"
                 >
-                  {" "}
-                  Simpan & Tambah Baru{" "}
+                  Simpan & Tambah Baru
                 </Button>
                 <Button
                   name="saveRedirect"
                   onClick={this.onSimpanHandler}
                   className="button-green"
                 >
-                  {" "}
-                  Simpan{" "}
+                  Simpan
                 </Button>
               </Row>
             </Col>

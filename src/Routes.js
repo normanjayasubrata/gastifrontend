@@ -10,7 +10,7 @@ import SideBarMenu from './components/SideBarMenu'
 import NotFound from "./components/NotFound";
 
 import Home from './pages/home'
-import LoginPage from './pages/login_page'
+import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import ListPropertyPage from './pages/ListPropertyPage'
 import AddPropertyPage from './pages/AddPropertyPage'
@@ -37,13 +37,12 @@ class Routes extends Component {
     return (
       <div style={{ height: "100%" }}>
         <Router basename={lconfig.BASE_URL}>
-          <NavBar /> 
+          <NavBar />
           <div style={{ height: "100%" }}>
-          {(!this.state.isMenuOpened && hasToken()) ? <SideBar handleClick={this.handleClick} /> : null}
+            {(!this.state.isMenuOpened && hasToken()) ? <SideBar handleClick={this.handleClick} /> : null}
 
             <OffCanvas width={300} transitionDuration={300} isMenuOpened={this.state.isMenuOpened} position={"left"} >
-            <OffCanvasBody>
-
+              <OffCanvasBody>
                 <Switch>
                   <Route exact path="/" component={Home} />
                   <Route path="/login" component={LoginPage} />
@@ -62,7 +61,7 @@ class Routes extends Component {
                   <Route path="*" component={NotFound} />
                 </Switch>
               </OffCanvasBody>
- 
+
               <OffCanvasMenu position="right" width={1000} >
                 <SideBarMenu handleClick={this.handleClick} />
               </OffCanvasMenu>
